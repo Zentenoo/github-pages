@@ -3,6 +3,7 @@ import reactLogo from './assets/react.svg'
 import viteLogo from '/vite.svg'
 import './App.css'
 import axios from 'axios'
+import { Plantilla } from './Plantilla'
 
 function App() {
   const [dataCompraBob, setDataCompraBob] = useState([])
@@ -113,7 +114,7 @@ function App() {
           ]
         });
         const pricesCompraArs = responseCompraArs.data.data.map((item) => item.adv.price);
-        
+
         setDataCompraArs(pricesCompraArs);
       } catch (error) {
         console.error('Error al cargar los datos:', error);
@@ -174,6 +175,9 @@ function App() {
             </ul>
           </div>
         </div>
+      </div>
+      <div>
+        <Plantilla />
       </div>
     </>
   )
