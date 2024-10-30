@@ -21,28 +21,28 @@ export const Plantilla = () => {
                     <option value="Nacho">Nacho</option>
                 </select>
                 <div>
-                    <h4>Moneda que se va a cambiar</h4>
+                    <h4>País de Destino</h4>
                     <label style={{ marginRight: '10px' }}>
                         <input
                             type="radio"
-                            value="BOB"
-                            checked={moneda === 'BOB'}
+                            value="Bolivia"
+                            checked={moneda === 'Bolivia'}
                             onChange={(e) => setMoneda(e.target.value)}
                         />
-                        BOB
+                        Bolivia
                     </label>
                     <label style={{ marginRight: '10px' }}>
                         <input
                             type="radio"
-                            value="ARS"
-                            checked={moneda === 'ARS'}
+                            value="Argentina"
+                            checked={moneda === 'Argentina'}
                             onChange={(e) => setMoneda(e.target.value)}
                         />
-                        ARS
+                        Argentina
                     </label>
                 </div>
                 {moneda ? <div>
-                    <h4>Moneda a la que quieres cambiar</h4>
+                    <h4>Moneda que se cotizará</h4>
                     <label style={{ marginRight: '10px' }}>
                         <input
                             type="radio"
@@ -74,7 +74,7 @@ export const Plantilla = () => {
                     </label>
                 </div> : <></>}
                 {usuario == "Zeggers" && moneda == "BOB" ? <div>
-                    <h4>Banco Boliviano que quieres depositar</h4>
+                    <h4>Banco Boliviano que figurará la cotización</h4>
                     <label style={{ marginRight: '10px' }}>
                         <input
                             type="radio"
@@ -95,7 +95,7 @@ export const Plantilla = () => {
                     </label>
                 </div> : <></>}
                 {usuario == "Zeggers" && moneda == "ARS"  ?  <div>
-                    <h4>Banco Argentino que quieres depositar</h4>
+                    <h4>Banco Argentino que figurará la cotización</h4>
                     <label style={{ marginRight: '10px' }}>
                         <input
                             type="radio"
@@ -125,7 +125,7 @@ export const Plantilla = () => {
                     </label>
                 </div> : <></>}
                 {usuario == "Nacho" && moneda == "BOB" ? <div>
-                    <h4>Banco Boliviano que quieres depositar</h4>
+                    <h4>Banco Boliviano que figurará la cotización</h4>
                     <label style={{ marginRight: '10px' }}>
                         <input
                             type="radio"
@@ -155,7 +155,7 @@ export const Plantilla = () => {
                     </label>
                 </div> : <></>}
                 {usuario == "Nacho" && moneda == "ARS"  ?  <div>
-                    <h4>Banco Argentino que quieres depositar</h4>
+                    <h4>Banco Argentino que figurará la cotización</h4>
                     <label style={{ marginRight: '10px' }}>
                         <input
                             type="radio"
