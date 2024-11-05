@@ -4,6 +4,7 @@ import viteLogo from '/vite.svg'
 import './App.css'
 import axios from 'axios'
 import { Plantilla } from './Plantilla'
+import { cargarCompraArs, cargarCompraBob, cargarVentaArs, cargarVentaBob } from './useCargarDatosBinance'
 
 function App() {
   const [dataCompraBob, setDataCompraBob] = useState([])
@@ -13,118 +14,19 @@ function App() {
 
 
   useEffect(() => {
-    const cargarCompraBob = async () => {
-      try {
-        const responseBob = await axios.post('https://servidorecono-production.up.railway.app/api/binance', {
-          "fiat": "BOB",
-          "page": 1,
-          "rows": 10,
-          "tradeType": "BUY",
-          "asset": "USDT",
-          "countries": [],
-          "proMerchantAds": false,
-          "shieldMerchantAds": false,
-          "filterType": "all",
-          "periods": [],
-          "additionalKycVerifyFilter": 0,
-          "publisherType": null,
-          "payTypes": [],
-          "classifies": ["mass", "profession", "fiat_trade"]
-        });
-        const prices = responseBob.data.data.map((item) => item.adv.price);
+    const cargarData = async () => {
+      const compraBob = await cargarCompraBob();
+      const ventaBob = await cargarVentaBob();
+      const ventaArs = await cargarVentaArs();
+      const compraArs = await cargarCompraArs();
 
-        setDataCompraBob(prices);
-      } catch (error) {
-        console.error('Error al cargar los datos:', error);
-      }
+      setDataCompraBob(compraBob);     
+      setDataVentaBob(ventaBob);
+      setDataArs(ventaArs);
+      setDataCompraArs(compraArs);
     };
 
-    const cargarVentaBob = async () => {
-      try {
-        const responseVentaBob = await axios.post('https://servidorecono-production.up.railway.app/api/binance', {
-          "fiat": "BOB",
-          "page": 1,
-          "rows": 10,
-          "tradeType": "SELL",
-          "asset": "USDT",
-          "countries": [],
-          "proMerchantAds": false,
-          "shieldMerchantAds": false,
-          "filterType": "all",
-          "periods": [],
-          "additionalKycVerifyFilter": 0,
-          "publisherType": null,
-          "payTypes": [],
-          "classifies": ["mass", "profession", "fiat_trade"]
-        });
-        const prices = responseVentaBob.data.data.map((item) => item.adv.price);
-
-        setDataVentaBob(prices);
-      } catch (error) {
-        console.error('Error al cargar los datos:', error);
-      }
-    };
-
-    const cargarVentaArs = async () => {
-      try {
-        const responseArs = await axios.post('https://servidorecono-production.up.railway.app/api/binance', {
-          "fiat": "ARS",
-          "page": 1,
-          "rows": 10,
-          "tradeType": "SELL",
-          "asset": "USDT",
-          "countries": [],
-          "proMerchantAds": false,
-          "shieldMerchantAds": false,
-          "filterType": "all",
-          "periods": [],
-          "additionalKycVerifyFilter": 0,
-          "publisherType": "merchant",
-          "payTypes": [],
-          "classifies": ["mass", "profession", "fiat_trade"]
-        });
-        const pricesArs = responseArs.data.data.map((item) => item.adv.price);
-
-        setDataArs(pricesArs);
-      } catch (error) {
-        console.error('Error al cargar los datos:', error);
-      }
-    };
-
-    const cargarCompraArs = async () => {
-      try {
-        const responseCompraArs = await axios.post('https://servidorecono-production.up.railway.app/api/binance', {
-          "fiat": "ARS",
-          "page": 1,
-          "rows": 10,
-          "tradeType": "BUY",
-          "asset": "USDT",
-          "countries": [],
-          "proMerchantAds": false,
-          "shieldMerchantAds": false,
-          "filterType": "all",
-          "periods": [],
-          "additionalKycVerifyFilter": 0,
-          "publisherType": "merchant",
-          "payTypes": [],
-          "classifies": [
-            "mass",
-            "profession",
-            "fiat_trade"
-          ]
-        });
-        const pricesCompraArs = responseCompraArs.data.data.map((item) => item.adv.price);
-
-        setDataCompraArs(pricesCompraArs);
-      } catch (error) {
-        console.error('Error al cargar los datos:', error);
-      }
-    };
-
-    cargarVentaArs()
-    cargarCompraArs()
-    cargarCompraBob()
-    cargarVentaBob()
+    cargarData();
   }, [])
 
   return (
