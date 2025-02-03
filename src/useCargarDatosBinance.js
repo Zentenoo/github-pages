@@ -14,7 +14,7 @@ export const cargarCompraBob = async () => {
       "filterType": "all",
       "periods": [],
       "additionalKycVerifyFilter": 0,
-      "publisherType": null,
+      "publisherType": "merchant",
       "payTypes": [],
       "classifies": ["mass", "profession", "fiat_trade"]
     });
@@ -39,7 +39,7 @@ export const cargarVentaBob = async () => {
       "filterType": "all",
       "periods": [],
       "additionalKycVerifyFilter": 0,
-      "publisherType": null,
+      "publisherType": "merchant",
       "payTypes": [],
       "classifies": ["mass", "profession", "fiat_trade"]
     });
