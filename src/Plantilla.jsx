@@ -1,5 +1,6 @@
 import { useEffect, useState } from 'react'
 import { cargarCompraArs, cargarCompraBob, cargarVentaArs, cargarVentaBob } from './useCargarDatosBinance'
+import Exportar from './Exportar'
 
 export const Plantilla = () => {
     const [usuario, setUsuario] = useState('');
@@ -66,7 +67,7 @@ export const Plantilla = () => {
 
         calculoRecibe = cotizacionBinanceVenta - ((cotizacionBinanceVenta * comision) / 100)
         console.log(calculoRecibe);
-        
+
         let formatoNumeroDescuento = new Intl.NumberFormat("es-ES", {
             minimumFractionDigits: 2,
             maximumFractionDigits: 4,
@@ -86,7 +87,7 @@ export const Plantilla = () => {
         }).format(calculoPaga1);
         setPaganSinComision(formatoSinComision);
 
-        calculoPaga2 = calculoPaga1/100
+        calculoPaga2 = calculoPaga1 / 100
         let formatoConComision = new Intl.NumberFormat("es-ES", {
             minimumFractionDigits: 2,
             maximumFractionDigits: 4,
@@ -339,6 +340,21 @@ export const Plantilla = () => {
                 <h2>Monto Total: {total} </h2>
                 <h2>La comision es: {comision}</h2>
             </div>
+            <Exportar 
+                usuario={usuario}
+                bancoBob={bancoBob}
+                bancoArs={bancoArs}
+                paisDestino={paisDestino} 
+                cambios={cambios} 
+                monto={monto} 
+                cotizacionBinanceCompra={cotizacionBinanceCompra}
+                cotizacionBinanceVenta={cotizacionBinanceVenta}
+                cotizacionDescuento={cotizacionDescuento}
+                recibe={recibe}
+                paganSinComision={paganSinComision}
+                paganConComision={paganConComision}
+                total={total}
+            />
         </div>
     );
 };
