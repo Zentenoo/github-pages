@@ -19,6 +19,7 @@ export const Plantilla = () => {
     const [paganSinComision, setPaganSinComision] = useState(0)
     const [paganConComision, setPaganConComision] = useState(0)
     const [total, setTotal] = useState(0)
+    const [comisionVisible, setComisionVisible] = useState(1)
 
 
     const [cotizacionBinanceVenta, setCotizacionBinanceVenta] = useState([])
@@ -66,43 +67,113 @@ export const Plantilla = () => {
         let calculoPaga2 = 0;
 
         calculoRecibe = cotizacionBinanceVenta - ((cotizacionBinanceVenta * comision) / 100)
-        console.log(calculoRecibe);
 
         let formatoNumeroDescuento = new Intl.NumberFormat("es-ES", {
             minimumFractionDigits: 2,
-            maximumFractionDigits: 4,
+            maximumFractionDigits: 3,
+            useGrouping: true,
         }).format(calculoRecibe);
         setCotizacionDescuento(formatoNumeroDescuento);
-        calculoRecibe = monto * calculoRecibe;
-        let formatoNumero = new Intl.NumberFormat("es-ES", {
-            minimumFractionDigits: 2,
-            maximumFractionDigits: 4,
-        }).format(calculoRecibe);
-        setRecibe(formatoNumero);
+        if (cambios === "ARS" && paisDestino === "Bolivia") {
 
-        calculoPaga1 = monto * cotizacionBinanceCompra;
-        let formatoSinComision = new Intl.NumberFormat("es-ES", {
-            minimumFractionDigits: 2,
-            maximumFractionDigits: 4,
-        }).format(calculoPaga1);
-        setPaganSinComision(formatoSinComision);
+            //Caso ARS En Bolivia
+            console.log('ARS');
+            
+            let formatoNumero = new Intl.NumberFormat("es-ES", {
+                minimumFractionDigits: 2,
+                maximumFractionDigits: 4,
+                useGrouping: true,
+            }).format(monto);
+            setRecibe(formatoNumero);
+            calculoPaga1 = (monto/calculoRecibe)*cotizacionBinanceCompra;
+            console.log(calculoPaga1);
+            let formatoSinComision = new Intl.NumberFormat("es-ES", {
+                minimumFractionDigits: 2,
+                maximumFractionDigits: 4,
+                useGrouping: true,
+            }).format(calculoPaga1);
+            setPaganSinComision(formatoSinComision);
+            calculoPaga2 = calculoPaga1 * (comisionVisible/100)
+            let formatoConComision = new Intl.NumberFormat("es-ES", {
+                minimumFractionDigits: 2,
+                maximumFractionDigits: 2,
+                useGrouping: true,
+            }).format(calculoPaga2);
+            setPaganConComision(formatoConComision);
+        }
+        else
+        {
+            if(cambios === "USD" && paisDestino === "Bolivia")
+            {
+                //Caso USD En Bolivia
+                console.log('USD');
+                calculoRecibe = monto * calculoRecibe;
+                let formatoNumero = new Intl.NumberFormat("es-ES", {
+                    minimumFractionDigits: 2,
+                    maximumFractionDigits: 4,
+                    useGrouping: true,
+                }).format(calculoRecibe);
+                setRecibe(formatoNumero);
+                calculoPaga1 = monto * cotizacionBinanceCompra;
+                let formatoSinComision = new Intl.NumberFormat("es-ES", {
+                    minimumFractionDigits: 2,
+                    maximumFractionDigits: 4,
+                    useGrouping: true,
+                }).format(calculoPaga1);
+                setPaganSinComision(formatoSinComision);
+                calculoPaga2 = calculoPaga1 * (comisionVisible/100)
+                let formatoConComision = new Intl.NumberFormat("es-ES", {
+                    minimumFractionDigits: 2,
+                    maximumFractionDigits: 2,
+                    useGrouping: true,
+                }).format(calculoPaga2);
+                setPaganConComision(formatoConComision);
+            }
+            else{
 
-        calculoPaga2 = calculoPaga1 / 100
-        let formatoConComision = new Intl.NumberFormat("es-ES", {
-            minimumFractionDigits: 2,
-            maximumFractionDigits: 4,
-        }).format(calculoPaga2);
-        setPaganConComision(formatoConComision);
+                //Caso BOB En Bolivia
+                console.log('BOB');
+                calculoRecibe = monto - (monto*0.01) ;
+                calculoRecibe = calculoRecibe/cotizacionBinanceCompra
+                calculoRecibe = calculoRecibe * (cotizacionBinanceVenta - ((cotizacionBinanceVenta * comision) / 100))
+                console.log({calculoRecibe});
+                
+                let formatoNumero = new Intl.NumberFormat("es-ES", {
+                    minimumFractionDigits: 2,
+                    maximumFractionDigits: 4,
+                    useGrouping: true,
+                }).format(calculoRecibe);
+                setRecibe(formatoNumero);
+                calculoPaga1 = monto - (monto*0.01);
+                let formatoSinComision = new Intl.NumberFormat("es-ES", {
+                    minimumFractionDigits: 2,
+                    maximumFractionDigits: 4,
+                    useGrouping: true,
+                }).format(calculoPaga1);
+                setPaganSinComision(formatoSinComision);
+                calculoPaga2 = monto * (comisionVisible/100)
+                let formatoConComision = new Intl.NumberFormat("es-ES", {
+                    minimumFractionDigits: 2,
+                    maximumFractionDigits: 2,
+                    useGrouping: true,
+                }).format(calculoPaga2);
+                setPaganConComision(formatoConComision);
+            }
+        }
+
 
         calculoPaga2 = calculoPaga1 + calculoPaga2
         let formatoTotal = new Intl.NumberFormat("es-ES", {
             minimumFractionDigits: 2,
-            maximumFractionDigits: 4,
-        }).format(calculoPaga2);
-        console.log(calculoPaga2);
+            maximumFractionDigits: 2,
+            useGrouping: true,
+        }).format(calculoPaga2);       
         setTotal(formatoTotal)
 
     }
+
+    console.log(paganSinComision);
+    
 
     return (
         <div>
@@ -114,7 +185,7 @@ export const Plantilla = () => {
                     <option value="Nacho">Nacho</option>
                 </select>
                 <div>
-                    <h4>País de Destino</h4>
+                    <h4>País Inicial</h4>
                     <label style={{ marginRight: '10px' }}>
                         <input
                             type="radio"
@@ -150,7 +221,6 @@ export const Plantilla = () => {
                             type="radio"
                             value="ARS"
                             checked={cambios === 'ARS'}
-                            disabled={paisDestino === 'Argentina'}
                             onChange={(e) => setCambios(e.target.value)}
                         />
                         ARS
@@ -161,7 +231,6 @@ export const Plantilla = () => {
                             value="BOB"
                             checked={cambios === 'BOB'}
                             onChange={(e) => setCambios(e.target.value)}
-                            disabled={paisDestino === 'Bolivia'}
                         />
                         BOB
                     </label>
@@ -231,15 +300,6 @@ export const Plantilla = () => {
                     <label style={{ marginRight: '10px' }}>
                         <input
                             type="radio"
-                            value="Banco Bisa"
-                            checked={bancoBob === 'Banco Bisa'}
-                            onChange={(e) => setBancoBob(e.target.value)}
-                        />
-                        Banco Bisa
-                    </label>
-                    <label style={{ marginRight: '10px' }}>
-                        <input
-                            type="radio"
                             value="Banco Nacional"
                             checked={bancoBob === 'Banco Nacional'}
                             onChange={(e) => setBancoBob(e.target.value)}
@@ -270,7 +330,7 @@ export const Plantilla = () => {
                 </div> : <></>}
                 <div>
                     <h4>Cotización Binance</h4>
-                    {cambios == "USD" && paisDestino == "Argentina" ? (
+                    {/* {cambios == "USD" && paisDestino == "Argentina" ? (
                         <select defaultValue={10} onChange={(e) => setCotizacionBinanceVenta(e.target.value)}>
                             <option value='0' disabled>Selecciona un monto:</option>
                             {dataCompraArs.length > 0 ?
@@ -281,8 +341,7 @@ export const Plantilla = () => {
                                 ) : (<>ola</>)
                             }
                         </select>
-                    ) : (<></>)}
-                    {cambios == "USD" && paisDestino == "Bolivia" ? (
+                    ) : (<></>)} */}
                         <div style={{ display: 'flex', flexDirection: 'row', gap: '10px' }}>
                             <select defaultValue={10} onChange={(e) => setCotizacionBinanceVenta(e.target.value)}>
                                 <option value='0' disabled>Selecciona un monto:</option>
@@ -305,7 +364,7 @@ export const Plantilla = () => {
                                 }
                             </select>
                         </div>
-                    ) : (<></>)}
+
 
                 </div>
                 <div onWheel={(e) => e.target.blur()}>
@@ -320,9 +379,15 @@ export const Plantilla = () => {
                 <button onClick={Calcular}>
                     Calcular
                 </button>
-                <div onWheel={(e) => e.target.blur()} style={{ display: 'flex', flexDirection: 'column', gap: '10px' }}>
-                    <label htmlFor="comision">Comision</label>
-                    <input id='comision' type="number" value={comision} onChange={(e) => setComision(e.target.value)}></input>
+                <div onWheel={(e) => e.target.blur()} style={{ display: 'flex', flexDirection: 'row', gap: '10px' }}>
+                    <div style={{ display: 'flex', flexDirection: 'column', gap: '10px' }}>
+                        <label htmlFor="comision">Comision cambiaria en %</label>
+                        <input id='comision' type="number" value={comision} onChange={(e) => setComision(e.target.value)}></input>
+                    </div>
+                    <div style={{ display: 'flex', flexDirection: 'column', gap: '10px' }}>
+                        <label htmlFor="comision">Comision Visible en %</label>
+                        <input id='comision' type="number" value={comisionVisible} onChange={(e) => setComisionVisible(e.target.value)}></input>
+                    </div>                    
                 </div>
 
             </div>
@@ -347,6 +412,7 @@ export const Plantilla = () => {
                 paisDestino={paisDestino} 
                 cambios={cambios} 
                 monto={monto} 
+                comisionVisible={comisionVisible}
                 cotizacionBinanceCompra={cotizacionBinanceCompra}
                 cotizacionBinanceVenta={cotizacionBinanceVenta}
                 cotizacionDescuento={cotizacionDescuento}
