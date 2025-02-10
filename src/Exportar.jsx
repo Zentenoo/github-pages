@@ -3,7 +3,7 @@ import html2canvas from "html2canvas";
 
 const Exportar = ({
   usuario,
-  paisDestino,
+  paisInicial,
   cambios,
   bancoBob,
   bancoArs,
@@ -82,7 +82,7 @@ const Exportar = ({
           </tbody>
         </table>
 
-        <h3 style={{ backgroundColor: "#e6ad00", color: "white", padding: "2px", textAlign: "center", margin: "0px" }}>MONTO COTIZADO: {cambios} {new Intl.NumberFormat("es-ES", {
+        <h3 style={{ backgroundColor: "#001b36", color: "white", padding: "2px", textAlign: "center", margin: "0px" }}>MONTO COTIZADO: {cambios} {new Intl.NumberFormat("es-ES", {
                 minimumFractionDigits: 2,
                 maximumFractionDigits: 2,
                 useGrouping: true,
@@ -91,7 +91,9 @@ const Exportar = ({
                 .replace(".", ",")}{" "}
         </h3>
 
-        <h3 style={{ backgroundColor: "#e6ad00", color: "white", padding: "2px", textAlign: "center", margin: "0px" }}>RECIBE EN ARGENTINA: ARS {recibe}</h3>
+        <h3 style={{ backgroundColor: "#e6ad00", color: "white", padding: "2px", textAlign: "center", margin: "0px" }}>
+          RECIBE EN {paisInicial==="Bolivia"? "ARGENTINA" : "BOLIVIA"}: {paisInicial==="Bolivia" ? "ARS" : "BOB"} {recibe}
+        </h3>
 
         <table style={{ width: "100%", borderCollapse: "collapse" }}>
           <tbody>
@@ -117,44 +119,136 @@ const Exportar = ({
           </tbody>
         </table>
 
-        <div style={{ display: "flex", justifyContent: "space-between", alignItems: "center" }}>
-          <div style={{ textAlign: "center" }}>
-            <h3>USA ESTE QR PARA FACILITARTE:</h3>
+        <div style={{ display: "flex", justifyContent: "center", alignItems: "center", gap: "40px" }}>
+          <div style={{ textAlign: "center", display: "flex", flexDirection: "column" }}>
             {usuario === "Zeggers" ? (
-              paisDestino === "Bolivia" ? (
+              paisInicial === "Bolivia" ? (
                 bancoBob === "Banco Ganadero" ? (
-                  <img
-                    src={`${import.meta.env.BASE_URL}Zegers Banco Ganadero.jpg`}
-                    alt="QR Code"
-                    style={{ width: "300px", height: "300px" }}
-                  />
+                  <div>
+                    <h4>USA ESTE QR PARA FACILITARTE:</h4>
+                    <img
+                      src={`${import.meta.env.BASE_URL}Zegers Banco Ganadero.jpg`}
+                      alt="QR Code"
+                      style={{ width: "300px", height: "300px" }}
+                    />
+                  </div>
+
                 ) : (
-                  <img
-                  src={`${import.meta.env.BASE_URL}Zegers Yape.jpg`}
-                  alt="QR Code"
-                  style={{ width: "300px", height: "300px" }}
-                />
+                  <div>
+                    <h4>USA ESTE QR PARA FACILITARTE:</h4>
+                    <img
+                      src={`${import.meta.env.BASE_URL}Zegers Yape.jpg`}
+                      alt="QR Code"
+                      style={{ width: "300px", height: "300px" }}
+                    />
+                  </div>
                 )
               ) : (
-                <p>Nada</p>
+                bancoArs === "Mercado Pago" ? (
+                  <div style={{ display: "flex", flexDirection: "column", alignItems: "center", gap: "0px" }}>
+                    <p>
+                      SANTIAGO ZEGERS BRIANCON
+                      <br />
+                      DNI: 96081178
+                      <br />
+                      Alias: szegersb
+                      <br />
+                      Banco MercadoPago
+                    </p>
+                  </div>
+                ) : (
+                  bancoArs === "Banco Ualá" ? (
+                    <div style={{ display: "flex", flexDirection: "column", alignItems: "center", gap: "0px" }}>
+                      <p>
+                        SANTIAGO ZEGERS BRIANCON
+                        <br />
+                        DNI: 96081178
+                        <br />
+                        Alias: zegerssantiagob.uala
+                        <br />
+                        Banco UALÁ
+                      </p>
+                    </div>
+                  ) : (
+                    <div style={{ display: "flex", flexDirection: "column", alignItems: "center", gap: "0px" }}>
+                      <p>
+                        SANTIAGO ZEGERS BRIANCON
+                        <br />
+                        DNI: 96081178
+                        <br />
+                        Alias: zegers.LEMON
+                        <br />
+                        Banco LEMON
+                      </p>
+                    </div>
+                  )
+                )
               )
             ) : usuario === "Nacho" ? (
-              paisDestino === "Bolivia" ? (
+              paisInicial === "Bolivia" ? (
                 bancoBob === "Banco Ganadero" ? (
-                  <img
-                    src={`${import.meta.env.BASE_URL}Nacho Banco Ganadero.jpg`}
-                    alt="QR Code"
-                    style={{ width: "300px", height: "300px" }}
-                  />
+                  <div>
+                    <h4>USA ESTE QR PARA FACILITARTE:</h4>
+                    <img
+                      src={`${import.meta.env.BASE_URL}Nacho Banco Ganadero.jpg`}
+                      alt="QR Code"
+                      style={{ width: "300px", height: "300px" }}
+                    />
+                  </div>
                 ) : (
-                  <img
-                    src={`${import.meta.env.BASE_URL}Nacho Banco BNB.jpg`}
-                    alt="QR Code"
-                    style={{ width: "300px", height: "300px" }}
-                  />
+                  <div>
+                    <h4>USA ESTE QR PARA FACILITARTE:</h4>
+                    <img
+                      src={`${import.meta.env.BASE_URL}Nacho Banco BNB.jpg`}
+                      alt="QR Code"
+                      style={{ width: "300px", height: "300px" }}
+                    />
+                  </div>
                 )
               ) : (
-                <p>Nada</p>
+                (bancoArs === "Mercado Pago") ? (
+                  <div style={{ display: "flex", flexDirection: "column", alignItems: "center", gap: "0px" }}>
+                    <p>
+                      IGNACIO BLUSKE BRIANCON
+                      <br />
+                      DNI: 51702821
+                      <br />
+                      Alias: Ignacioblusk5
+                      <br />
+                      Mercado Pago
+                    </p>
+                  </div>
+                ) :(
+                  (bancoArs === "Banco Ualá") ? (
+                    <div style={{ display: "flex", flexDirection: "column", alignItems: "center", gap: "0px" }}>
+                      <p>
+                        IGNACIO BLUSKE BRIANCON
+                        <br />
+                        DNI: 51702821
+                        <br />
+                        Alias: ibluskeb.uala
+                        <br />
+                        Uala
+                        <br />
+                        CVU: 0000007900205170282162
+                      </p>
+                    </div>
+                  ) : (
+                    <div style={{ display: "flex", flexDirection: "column", alignItems: "center", gap: "0px" }}>
+                      <p>
+                        IGNACIO BLUSKE BRIANCON
+                        <br />
+                        DNI: 51702821
+                        <br />
+                        Alias: ibluskeb.PREX
+                        <br />
+                        Prex
+                        <br />
+                        CVU: 0000013000032236016029
+                      </p>
+                    </div>                 
+                  )
+                )
               )
             ) : (
               <p>Nada</p>
