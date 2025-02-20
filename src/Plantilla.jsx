@@ -157,7 +157,7 @@ export const Plantilla = () => {
     
                     //Caso BOB En Bolivia
                     console.log('BOB');
-                    calculoRecibe = monto - (monto*0.01) ;
+                    calculoRecibe = monto - (monto*comisionVisible/100) ;
                     calculoRecibe = calculoRecibe/cotizacionBinanceCompra
                     calculoRecibe = calculoRecibe * (cotizacionBinanceVenta - ((cotizacionBinanceVenta * comision) / 100))
                     
@@ -167,7 +167,7 @@ export const Plantilla = () => {
                         useGrouping: true,
                     }).format(calculoRecibe);
                     setRecibe(formatoNumero);
-                    calculoPaga1 = monto - (monto*0.01);
+                    calculoPaga1 = monto - (monto*comisionVisible);
                     let formatoSinComision = new Intl.NumberFormat("es-ES", {
                         minimumFractionDigits: 2,
                         maximumFractionDigits: 2,
@@ -198,7 +198,7 @@ export const Plantilla = () => {
 
             let formatoNumeroDescuento = new Intl.NumberFormat("es-ES", {
                 minimumFractionDigits: 2,
-                maximumFractionDigits: 3,
+                maximumFractionDigits: 2,
                 useGrouping: true,
             }).format(calculoRecibe);
             setCotizacionDescuento(formatoNumeroDescuento);
@@ -207,7 +207,7 @@ export const Plantilla = () => {
                 //Caso ARS En Argentina
                     
                 console.log('ARS');
-                calculoRecibe = ((monto / cotizacionBinanceCompra)*calculoRecibe)
+                calculoRecibe = (((monto - (monto*comisionVisible/100)) / cotizacionBinanceCompra)*calculoRecibe)
                 
                 let formatoNumero = new Intl.NumberFormat("es-ES", {
                     minimumFractionDigits: 2,
@@ -215,7 +215,7 @@ export const Plantilla = () => {
                     useGrouping: true,
                 }).format(calculoRecibe);
                 setRecibe(formatoNumero);
-                calculoPaga1 = monto - (monto*0.01);
+                calculoPaga1 = monto - (monto*comisionVisible/100) ;
                 let formatoSinComision = new Intl.NumberFormat("es-ES", {
                     minimumFractionDigits: 2,
                     maximumFractionDigits: 2,

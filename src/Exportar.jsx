@@ -66,7 +66,7 @@ const Exportar = ({
         <table style={{ width: "100%", borderCollapse: "collapse" }}>
           <tbody>
             <tr>
-              <td style={{ padding: "2px" }}>Cambio BOB/USD</td>
+              <td style={{ padding: "2px" }}>Cambio {paisInicial==="Bolivia"? "Bs./USD" : "USD/Bs."}</td>
               {paisInicial === "Bolivia" ? (
                 <td style={{ textAlign: "right", padding: "2px" }}>
                   {new Intl.NumberFormat("es-ES", {
@@ -78,9 +78,9 @@ const Exportar = ({
                   } Bs.
                 </td>
               ):(
-                <td style={{ textAlign: "right", padding: "2px" }}>{cotizacionDescuento} ARS</td>
+                <td style={{ textAlign: "right", padding: "2px" }}>{cotizacionDescuento} Bs.</td>
               )}
-              <td style={{ padding: "2px" }}>Cambio ARS/USD</td>
+              <td style={{ padding: "2px" }}>Cambio {paisInicial==="Argentina"? "ARS/USD" : "USD/ARS"} </td>
               {paisInicial === "Bolivia" ? (
                 <td style={{ textAlign: "right", padding: "2px" }}>{cotizacionDescuento} ARS</td>
               ):(
@@ -102,12 +102,11 @@ const Exportar = ({
                 maximumFractionDigits: 2,
                 useGrouping: true,
                 })
-                .format(monto)
-                .replace(".", ",")}{" "}
+                .format(monto)}
         </h3>
 
         <h3 style={{ backgroundColor: "#e6ad00", color: "white", padding: "2px", textAlign: "center", margin: "0px" }}>
-          RECIBE EN {paisInicial==="Bolivia"? "ARGENTINA" : "BOLIVIA"}: {paisInicial==="Bolivia" ? "ARS" : "BOB"} {recibe}
+          RECIBE EN {paisInicial==="Bolivia"? "ARGENTINA" : "BOLIVIA"}: {paisInicial==="Bolivia" ? "ARS" : "Bs."} {recibe}
         </h3>
 
         <table style={{ width: "100%", borderCollapse: "collapse" }}>
@@ -115,13 +114,13 @@ const Exportar = ({
             <tr>
               <td style={{ backgroundColor: "#001b36", color: "white", padding: "2px" }}>COMISIÓN</td>
               <td style={{ padding: "2px" }}>{comisionVisible}%</td>
-              <td style={{ padding: "2px" }}>BOB</td>
+              <td style={{ padding: "2px" }}>{paisInicial==="Bolivia"? "Bs." : "ARS"}</td>
               <td style={{ padding: "2px" }}>{paganConComision}</td>
             </tr>
           </tbody>
         </table>
 
-        <h3 style={{ backgroundColor: "#e6ad00", color: "white", padding: "2px", textAlign: "center", margin: "0px" }}>TOTAL A PAGAR EN: {paisInicial==="Bolivia"? "BOB" : "ARS"} {total}</h3>
+        <h3 style={{ backgroundColor: "#e6ad00", color: "white", padding: "2px", textAlign: "center", margin: "0px" }}>TOTAL A PAGAR EN: {paisInicial==="Bolivia"? "Bs." : "ARS"} {total}</h3>
 
         <table style={{ width: "100%", borderCollapse: "collapse" }}>
           <tbody>
