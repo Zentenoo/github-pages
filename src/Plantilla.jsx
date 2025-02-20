@@ -81,7 +81,7 @@ export const Plantilla = () => {
 
             let formatoNumeroDescuento = new Intl.NumberFormat("es-ES", {
                 minimumFractionDigits: 2,
-                maximumFractionDigits: 3,
+                maximumFractionDigits: 2,
                 useGrouping: true,
             }).format(calculoRecibe);
             setCotizacionDescuento(formatoNumeroDescuento);
@@ -92,14 +92,14 @@ export const Plantilla = () => {
                 
                 let formatoNumero = new Intl.NumberFormat("es-ES", {
                     minimumFractionDigits: 2,
-                    maximumFractionDigits: 4,
+                    maximumFractionDigits: 2,
                     useGrouping: true,
                 }).format(monto);
                 setRecibe(formatoNumero);
                 calculoPaga1 = (monto/calculoRecibe)*cotizacionBinanceCompra;
                 let formatoSinComision = new Intl.NumberFormat("es-ES", {
                     minimumFractionDigits: 2,
-                    maximumFractionDigits: 4,
+                    maximumFractionDigits: 2,
                     useGrouping: true,
                 }).format(calculoPaga1);
                 setPaganSinComision(formatoSinComision);
@@ -127,14 +127,14 @@ export const Plantilla = () => {
                     calculoRecibe = monto * calculoRecibe;
                     let formatoNumero = new Intl.NumberFormat("es-ES", {
                         minimumFractionDigits: 2,
-                        maximumFractionDigits: 4,
+                        maximumFractionDigits: 2,
                         useGrouping: true,
                     }).format(calculoRecibe);
                     setRecibe(formatoNumero);
                     calculoPaga1 = monto * cotizacionBinanceCompra;
                     let formatoSinComision = new Intl.NumberFormat("es-ES", {
                         minimumFractionDigits: 2,
-                        maximumFractionDigits: 4,
+                        maximumFractionDigits: 2,
                         useGrouping: true,
                     }).format(calculoPaga1);
                     setPaganSinComision(formatoSinComision);
@@ -163,14 +163,14 @@ export const Plantilla = () => {
                     
                     let formatoNumero = new Intl.NumberFormat("es-ES", {
                         minimumFractionDigits: 2,
-                        maximumFractionDigits: 4,
+                        maximumFractionDigits: 2,
                         useGrouping: true,
                     }).format(calculoRecibe);
                     setRecibe(formatoNumero);
                     calculoPaga1 = monto - (monto*0.01);
                     let formatoSinComision = new Intl.NumberFormat("es-ES", {
                         minimumFractionDigits: 2,
-                        maximumFractionDigits: 4,
+                        maximumFractionDigits: 2,
                         useGrouping: true,
                     }).format(calculoPaga1);
                     setPaganSinComision(formatoSinComision);
@@ -211,14 +211,14 @@ export const Plantilla = () => {
                 
                 let formatoNumero = new Intl.NumberFormat("es-ES", {
                     minimumFractionDigits: 2,
-                    maximumFractionDigits: 4,
+                    maximumFractionDigits: 2,
                     useGrouping: true,
                 }).format(calculoRecibe);
                 setRecibe(formatoNumero);
                 calculoPaga1 = monto - (monto*0.01);
                 let formatoSinComision = new Intl.NumberFormat("es-ES", {
                     minimumFractionDigits: 2,
-                    maximumFractionDigits: 4,
+                    maximumFractionDigits: 2,
                     useGrouping: true,
                 }).format(calculoPaga1);
                 setPaganSinComision(formatoSinComision);
@@ -246,14 +246,14 @@ export const Plantilla = () => {
                     calculoRecibe = monto * calculoRecibe;
                     let formatoNumero = new Intl.NumberFormat("es-ES", {
                         minimumFractionDigits: 2,
-                        maximumFractionDigits: 4,
+                        maximumFractionDigits: 2,
                         useGrouping: true,
                     }).format(calculoRecibe);
                     setRecibe(formatoNumero);
                     calculoPaga1 = monto * cotizacionBinanceCompra;
                     let formatoSinComision = new Intl.NumberFormat("es-ES", {
                         minimumFractionDigits: 2,
-                        maximumFractionDigits: 4,
+                        maximumFractionDigits: 2,
                         useGrouping: true,
                     }).format(calculoPaga1);
                     setPaganSinComision(formatoSinComision);
@@ -278,14 +278,14 @@ export const Plantilla = () => {
                 
                     let formatoNumero = new Intl.NumberFormat("es-ES", {
                         minimumFractionDigits: 2,
-                        maximumFractionDigits: 4,
+                        maximumFractionDigits: 2,
                         useGrouping: true,
                     }).format(monto);
                     setRecibe(formatoNumero);
                     calculoPaga1 = (monto/calculoRecibe)*cotizacionBinanceCompra;
                     let formatoSinComision = new Intl.NumberFormat("es-ES", {
                         minimumFractionDigits: 2,
-                        maximumFractionDigits: 4,
+                        maximumFractionDigits: 2,
                         useGrouping: true,
                     }).format(calculoPaga1);
                     setPaganSinComision(formatoSinComision);

@@ -67,23 +67,38 @@ const Exportar = ({
           <tbody>
             <tr>
               <td style={{ padding: "2px" }}>Cambio BOB/USD</td>
-              <td style={{ textAlign: "right", padding: "2px" }}>
-                {new Intl.NumberFormat("es-ES", {
-                minimumFractionDigits: 2,
-                maximumFractionDigits: 2,
-                useGrouping: true,
-                })
-                .format(cotizacionBinanceCompra)
-                .replace(".", ",")}{" "} Bs.
-              </td>
+              {paisInicial === "Bolivia" ? (
+                <td style={{ textAlign: "right", padding: "2px" }}>
+                  {new Intl.NumberFormat("es-ES", {
+                  minimumFractionDigits: 2,
+                  maximumFractionDigits: 2,
+                  useGrouping: true,
+                  })
+                  .format(cotizacionBinanceCompra)
+                  } Bs.
+                </td>
+              ):(
+                <td style={{ textAlign: "right", padding: "2px" }}>{cotizacionDescuento} ARS</td>
+              )}
               <td style={{ padding: "2px" }}>Cambio ARS/USD</td>
-              <td style={{ textAlign: "right", padding: "2px" }}>{cotizacionDescuento} ARS</td>
+              {paisInicial === "Bolivia" ? (
+                <td style={{ textAlign: "right", padding: "2px" }}>{cotizacionDescuento} ARS</td>
+              ):(
+                <td style={{ textAlign: "right", padding: "2px" }}>
+                  {new Intl.NumberFormat("es-ES", {
+                  minimumFractionDigits: 2,
+                  maximumFractionDigits: 2,
+                  useGrouping: true,
+                  })
+                  .format(cotizacionBinanceCompra)
+                  } ARS
+                </td>
+              )}
             </tr>
           </tbody>
         </table>
 
         <h3 style={{ backgroundColor: "#001b36", color: "white", padding: "2px", textAlign: "center", margin: "0px" }}>MONTO COTIZADO: {cambios} {new Intl.NumberFormat("es-ES", {
-                minimumFractionDigits: 2,
                 maximumFractionDigits: 2,
                 useGrouping: true,
                 })
