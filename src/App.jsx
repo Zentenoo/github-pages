@@ -1,16 +1,15 @@
 import { useEffect, useState } from 'react'
-import reactLogo from './assets/react.svg'
-import viteLogo from '/vite.svg'
 import './App.css'
-import axios from 'axios'
 import { Plantilla } from './Plantilla'
-import { cargarCompraArs, cargarCompraBob, cargarVentaArs, cargarVentaBob } from './useCargarDatosBinance'
+import { cargarCompraArs, cargarCompraBob, cargarVentaArs, cargarVentaBob, cargarCompraBrl, cargarVentaBrl } from './useCargarDatosBinance'
 
 function App() {
   const [dataCompraBob, setDataCompraBob] = useState([])
   const [dataVentaBob, setDataVentaBob] = useState([])
   const [dataArs, setDataArs] = useState([])
   const [dataCompraArs, setDataCompraArs] = useState([])
+  const [dataVentaBrl, setDataVentaBrl] = useState([])
+  const [dataCompraBrl, setDataCompraBrl] = useState([])
   const [tablasVisibles, setTablasVisibles] = useState(false)
 
   useEffect(() => {
@@ -19,11 +18,15 @@ function App() {
       const ventaBob = await cargarVentaBob();
       const ventaArs = await cargarVentaArs();
       const compraArs = await cargarCompraArs();
+      const ventaBrl = await cargarVentaBrl();
+      const compraBrl = await cargarCompraBrl();
 
       setDataCompraBob(compraBob);
       setDataVentaBob(ventaBob);
       setDataArs(ventaArs);
       setDataCompraArs(compraArs);
+      setDataVentaBrl(ventaBrl);
+      setDataCompraBrl(compraBrl);
     };
 
     cargarData();
@@ -87,6 +90,26 @@ function App() {
               {dataCompraArs.length === 0 && <p>No hay datos disponibles</p>}
               <ul>
                 {dataCompraArs.map((item, index) => (
+                  <li key={index}> Precio: {item}</li>
+                ))}
+              </ul>
+            </div>
+          </div>
+          <div style={{ display: 'flex', flexDirection: 'column' }}>
+            <div className="data-section">
+              <h2>Datos de Venta Brl</h2>
+              {dataVentaBrl.length === 0 && <p>No hay datos disponibles</p>}
+              <ul>
+                {dataVentaBrl.map((item, index) => (
+                  <li key={index}> Precio: {item}</li>
+                ))}
+              </ul>
+            </div>
+            <div className="data-section">
+              <h2>Datos de Compra Brl</h2>
+              {dataCompraBob.length === 0 && <p>No hay datos disponibles</p>}
+              <ul>
+                {dataCompraBrl.map((item, index) => (
                   <li key={index}> Precio: {item}</li>
                 ))}
               </ul>

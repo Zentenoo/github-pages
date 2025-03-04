@@ -3,7 +3,7 @@ import { cargarCompraArs, cargarCompraBob, cargarVentaArs, cargarVentaBob } from
 import Exportar from './Exportar'
 
 export const Plantilla = () => {
-    const [usuario, setUsuario] = useState('');
+    const [usuario, setUsuario] = useState(localStorage.getItem('usuario') || '');
     const [paisInicial, setPaisInicial] = useState('');
     const [cambios, setCambios] = useState('');
     const [bancoBob, setBancoBob] = useState('');
@@ -25,6 +25,11 @@ export const Plantilla = () => {
     const [cotizacionBinanceVenta, setCotizacionBinanceVenta] = useState([])
     const [cotizacionBinanceCompra, setCotizacionBinanceCompra] = useState([])
 
+    useEffect(() => {
+        if (usuario) {
+            localStorage.setItem('usuario', usuario);
+        }
+    }, [usuario]);
 
     useEffect(() => {
         const cargarData = async () => {
@@ -315,7 +320,7 @@ export const Plantilla = () => {
     return (
         <div>
             <div style={{ display: 'flex', flexDirection: 'column', alignItems: 'center', gap: '10px' }}>
-                <select name="usuario" id="usuario" onChange={(e) => { setUsuario(e.target.value); setBancoArs(''); setBancoBob('') }} defaultValue={''}>
+                <select name="usuario" id="usuario" onChange={(e) => { setUsuario(e.target.value); setBancoArs(''); setBancoBob('') }} value={usuario}>
                     <option value="" disabled >Selecciona un usuario</option>
                     <option value="Zeggers">Zeggers</option>
                     <option value="Nacho">Nacho</option>

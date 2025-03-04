@@ -103,3 +103,57 @@ export const cargarCompraArs = async () => {
     return [];
   }
 };
+
+export const cargarVentaBrl = async () => {
+  try {
+    const responseVentaBrl = await axios.post('https://servidorecono-production.up.railway.app/api/binance', {
+      "fiat": "BRL",
+      "page": 1,
+      "rows": 10,
+      "tradeType": "SELL",
+      "asset": "USDT",
+      "countries": [],
+      "proMerchantAds": false,
+      "shieldMerchantAds": false,
+      "filterType": "all",
+      "periods": [],
+      "additionalKycVerifyFilter": 0,
+      "publisherType": "merchant",
+      "payTypes": [],
+      "classifies": ["mass", "profession", "fiat_trade"]
+    });
+    return responseVentaBrl.data.data.map((item) => item.adv.price);
+  } catch (error) {
+    console.error('Error al cargar los datos:', error);
+    return [];
+  }
+};
+
+export const cargarCompraBrl = async () => {
+  try {
+    const responseCompraBrl = await axios.post('https://servidorecono-production.up.railway.app/api/binance', {
+      "fiat": "BRL",
+      "page": 1,
+      "rows": 10,
+      "tradeType": "BUY",
+      "asset": "USDT",
+      "countries": [],
+      "proMerchantAds": false,
+      "shieldMerchantAds": false,
+      "filterType": "all",
+      "periods": [],
+      "additionalKycVerifyFilter": 0,
+      "publisherType": "merchant",
+      "payTypes": [],
+      "classifies": [
+        "mass",
+        "profession",
+        "fiat_trade"
+      ]
+    });
+    return responseCompraBrl.data.data.map((item) => item.adv.price);
+  } catch (error) {
+    console.error('Error al cargar los datos:', error);
+    return [];
+  }
+};
