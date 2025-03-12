@@ -2,7 +2,7 @@ import axios from 'axios';
 
 export const cargarCompraBob = async () => {
   try {
-    const responseBob = await axios.post('https://servidorecono-production.up.railway.app/api/binance', {
+    const responseBob = await axios.post('https://econoserver-production.up.railway.app/api/binance', {
       "fiat": "BOB",
       "page": 1,
       "rows": 10,
@@ -27,7 +27,7 @@ export const cargarCompraBob = async () => {
 
 export const cargarVentaBob = async () => {
   try {
-    const responseVentaBob = await axios.post('https://servidorecono-production.up.railway.app/api/binance', {
+    const responseVentaBob = await axios.post('https://econoserver-production.up.railway.app/api/binance', {
       "fiat": "BOB",
       "page": 1,
       "rows": 10,
@@ -52,7 +52,7 @@ export const cargarVentaBob = async () => {
 
 export const cargarVentaArs = async () => {
   try {
-    const responseArs = await axios.post('https://servidorecono-production.up.railway.app/api/binance', {
+    const responseArs = await axios.post('https://econoserver-production.up.railway.app/api/binance', {
       "fiat": "ARS",
       "page": 1,
       "rows": 10,
@@ -77,7 +77,7 @@ export const cargarVentaArs = async () => {
 
 export const cargarCompraArs = async () => {
   try {
-    const responseCompraArs = await axios.post('https://servidorecono-production.up.railway.app/api/binance', {
+    const responseCompraArs = await axios.post('https://econoserver-production.up.railway.app/api/binance', {
       "fiat": "ARS",
       "page": 1,
       "rows": 10,
@@ -106,7 +106,7 @@ export const cargarCompraArs = async () => {
 
 export const cargarVentaBrl = async () => {
   try {
-    const responseVentaBrl = await axios.post('https://servidorecono-production.up.railway.app/api/binance', {
+    const responseVentaBrl = await axios.post('https://econoserver-production.up.railway.app/api/binance', {
       "fiat": "BRL",
       "page": 1,
       "rows": 10,
@@ -131,7 +131,7 @@ export const cargarVentaBrl = async () => {
 
 export const cargarCompraBrl = async () => {
   try {
-    const responseCompraBrl = await axios.post('https://servidorecono-production.up.railway.app/api/binance', {
+    const responseCompraBrl = await axios.post('https://econoserver-production.up.railway.app/api/binance', {
       "fiat": "BRL",
       "page": 1,
       "rows": 10,
