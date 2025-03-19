@@ -167,7 +167,7 @@ const Exportar = ({
                       <br />
                       Alias: szegersb
                       <br />
-                      Banco MercadoPago
+                      Mercado Pago
                     </p>
                   </div>
                 ) : (
@@ -180,10 +180,13 @@ const Exportar = ({
                         <br />
                         Alias: zegerssantiagob.uala
                         <br />
-                        Banco UALÁ
+                        CBU: 0000007900209608117808
+                        <br />
+                        Banco Ualá
                       </p>
                     </div>
                   ) : (
+                    bancoArs === "banco lemon" ? (
                     <div style={{ display: "flex", flexDirection: "column", alignItems: "center", gap: "0px" }}>
                       <p>
                         SANTIAGO ZEGERS BRIANCON
@@ -192,10 +195,42 @@ const Exportar = ({
                         <br />
                         Alias: zegers.LEMON
                         <br />
-                        Banco LEMON
+                        CBU: 0000168300000002946041
+                        <br />
+                        Banco Lemon / Findi SA
                       </p>
                     </div>
-                  )
+                  ):(
+                    bancoArs === "Banco Brubank" ? (
+                      <div style={{ display: "flex", flexDirection: "column", alignItems: "center", gap: "0px" }}>
+                        <p>
+                          SANTIAGO ZEGERS BRIANCON
+                          <br />
+                          DNI: 96081178
+                          <br />
+                          Alias: santiagozegers
+                          <br />
+                          CBU: 1430001713040034310010
+                          <br />
+                          Banco Brubank
+                        </p>
+                      </div>
+                    ):(
+                      <div style={{ display: "flex", flexDirection: "column", alignItems: "center", gap: "0px" }}>
+                        <p>
+                          SANTIAGO ZEGERS BRIANCON
+                          <br />
+                          DNI: 96081178
+                          <br />
+                          Alias: ACUDIERA.NUCA.ABEDUL
+                          <br />
+                          CBU: 0070086330004049205162
+                          <br />
+                          Banco Galicia
+                        </p>
+                      </div>
+                    )
+                  ))
                 )
               )
             ) : usuario === "Nacho" ? (
@@ -213,7 +248,7 @@ const Exportar = ({
                   <div>
                     <h4>USA ESTE QR PARA FACILITARTE:</h4>
                     <img
-                      src={`${import.meta.env.BASE_URL}Nacho Banco BNB.jpg`}
+                      src={`${import.meta.env.BASE_URL}Nacho Banco Ganadero.jpg`}
                       alt="QR Code"
                       style={{ width: "300px", height: "300px" }}
                     />
@@ -254,11 +289,11 @@ const Exportar = ({
                         <br />
                         DNI: 51702821
                         <br />
-                        Alias: ibluskeb.PREX
+                        Alias: iibluskeb.lemon
                         <br />
-                        Prex
+                        CBU: 0000168300000015980139
                         <br />
-                        CVU: 0000013000032236016029
+                        Banco Lemon
                       </p>
                     </div>                 
                   )

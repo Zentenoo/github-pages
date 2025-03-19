@@ -426,6 +426,24 @@ export const Plantilla = () => {
                         />
                         Banco Ualá
                     </label>
+                    <label style={{ marginRight: '10px' }}>
+                        <input
+                            type="radio"
+                            value="Banco Brubank"
+                            checked={bancoArs === 'Banco Brubank'}
+                            onChange={(e) => setBancoArs(e.target.value)}
+                        />
+                        Banco Brubank
+                    </label>
+                    <label style={{ marginRight: '10px' }}>
+                        <input
+                            type="radio"
+                            value="Banco Galicia"
+                            checked={bancoArs === 'Banco Galicia'}
+                            onChange={(e) => setBancoArs(e.target.value)}
+                        />
+                        Banco Galicia
+                    </label>
                 </div> : <></>}
                 {usuario == "Nacho" && paisInicial == "Bolivia" ? <div>
                     <h4>Banco Boliviano que figurará la cotización</h4>
@@ -437,15 +455,6 @@ export const Plantilla = () => {
                             onChange={(e) => setBancoBob(e.target.value)}
                         />
                         Banco Ganadero
-                    </label>
-                    <label style={{ marginRight: '10px' }}>
-                        <input
-                            type="radio"
-                            value="Banco Nacional"
-                            checked={bancoBob === 'Banco Nacional'}
-                            onChange={(e) => setBancoBob(e.target.value)}
-                        />
-                        Banco Nacional
                     </label>
                 </div> : <></>}
                 {usuario == "Nacho" && paisInicial == "Argentina" ? <div>
@@ -471,11 +480,11 @@ export const Plantilla = () => {
                     <label style={{ marginRight: '10px' }}>
                         <input
                             type="radio"
-                            value="Banco Prex"
-                            checked={bancoArs === 'Banco Prex'}
+                            value="banco lemon"
+                            checked={bancoArs === 'banco lemon'}
                             onChange={(e) => setBancoArs(e.target.value)}
                         />
-                        Banco Prex
+                        Banco Lemon
                     </label>
                 </div> : <></>}
                 <div>
