@@ -1,4 +1,5 @@
-import React, { useRef, useState, useEffect } from "react";
+import { useRef } from "react";
+import PropTypes from "prop-types";
 import html2canvas from "html2canvas";
 
 const Exportar = ({
@@ -35,7 +36,7 @@ const Exportar = ({
   const exportToImage = () => {
     if (tableRef.current) {
       html2canvas(tableRef.current, {
-        scale: 2,
+        scale: 3,
         useCORS: true,
         backgroundColor: "#fff",
       }).then((canvas) => {
@@ -167,6 +168,8 @@ const Exportar = ({
                       <br />
                       Alias: szegersb
                       <br />
+                      CBU: 0000003100068509876137
+                      <br />
                       Mercado Pago
                     </p>
                   </div>
@@ -277,9 +280,9 @@ const Exportar = ({
                         <br />
                         Alias: ibluskeb.uala
                         <br />
-                        Uala
+                        CBU: 0000007900205170282162
                         <br />
-                        CVU: 0000007900205170282162
+                        Banco Ualá
                       </p>
                     </div>
                   ) : (
@@ -314,6 +317,22 @@ const Exportar = ({
       </div>
     </div>
   );
+};
+Exportar.propTypes = {
+  usuario: PropTypes.string.isRequired,
+  paisInicial: PropTypes.string.isRequired,
+  cambios: PropTypes.string.isRequired,
+  bancoBob: PropTypes.string.isRequired,
+  bancoArs: PropTypes.string.isRequired,
+  monto: PropTypes.string.isRequired,
+  comisionVisible: PropTypes.number.isRequired,
+  cotizacionBinanceCompra: PropTypes.string.isRequired,
+  cotizacionBinanceVenta: PropTypes.string.isRequired,
+  cotizacionDescuento: PropTypes.number.isRequired,
+  recibe: PropTypes.number.isRequired,
+  paganSinComision: PropTypes.number.isRequired,
+  paganConComision: PropTypes.number.isRequired,
+  total: PropTypes.number.isRequired,
 };
 
 export default Exportar;

@@ -22,8 +22,8 @@ export const Plantilla = () => {
     const [comisionVisible, setComisionVisible] = useState(1)
 
 
-    const [cotizacionBinanceVenta, setCotizacionBinanceVenta] = useState([])
-    const [cotizacionBinanceCompra, setCotizacionBinanceCompra] = useState([])
+    const [cotizacionBinanceVenta, setCotizacionBinanceVenta] = useState('')
+    const [cotizacionBinanceCompra, setCotizacionBinanceCompra] = useState('')
 
     useEffect(() => {
         if (usuario) {
