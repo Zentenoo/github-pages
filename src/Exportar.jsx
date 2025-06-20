@@ -292,7 +292,7 @@ const Exportar = ({
                         <br />
                         DNI: 51702821
                         <br />
-                        Alias: iibluskeb.lemon
+                        Alias: ibluskeb.lemon
                         <br />
                         CBU: 0000168300000015980139
                         <br />
