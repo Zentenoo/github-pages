@@ -320,10 +320,11 @@ export const Plantilla = () => {
     return (
         <div>
             <div style={{ display: 'flex', flexDirection: 'column', alignItems: 'center', gap: '10px' }}>
-                <select name="usuario" id="usuario" onChange={(e) => { setUsuario(e.target.value); setBancoArs(''); setBancoBob('') }} value={usuario}>
+                <select name="usuario" id="usuario" onChange={(e) => { setUsuario(e.target.value); setBancoArs(''); setBancoBob('') }} value={usuario}
+                    className="p-3 border border-gray-300 rounded-md shadow-sm">
                     <option value="" disabled >Selecciona un usuario</option>
-                    <option value="Zeggers">Zeggers</option>
-                    <option value="Nacho">Nacho</option>
+                    <option className='text-gray-600' value="Zeggers">Zeggers</option>
+                    <option className='text-gray-600' value="Nacho">Nacho</option>
                 </select>
                 <div>
                     <h4>País Inicial</h4>
@@ -491,22 +492,24 @@ export const Plantilla = () => {
                     <h4>Cotización Binance</h4>
                     {paisInicial == "Argentina" ? (
                         <div style={{ display: 'flex', flexDirection: 'row', gap: '10px' }}>
-                            <select defaultValue={10} onChange={(e) => setCotizacionBinanceCompra(e.target.value)}>
+                            <select defaultValue={10} onChange={(e) => setCotizacionBinanceCompra(e.target.value)}
+                                className="p-3 border border-gray-300 rounded-md shadow-sm">
                                 <option value='0' disabled>Selecciona un monto:</option>
                                 {dataCompraArs.length > 0 ?
                                     (
                                         dataCompraArs.slice().reverse().map((item, index) => (
-                                            <option key={index} value={item}>[{dataCompraArs.length - index}] Ars - {item}</option>
+                                            <option key={index} value={item} className='text-gray-600'>[{dataCompraArs.length - index}] Ars - {item}</option>
                                         ))
                                     ) : (<>ola</>)
                                 }
                             </select>
-                            <select defaultValue={10} onChange={(e) => setCotizacionBinanceVenta(e.target.value)}>
+                            <select defaultValue={10} onChange={(e) => setCotizacionBinanceVenta(e.target.value)}
+                                className="p-3 border border-gray-300 rounded-md shadow-sm">
                                 <option value='0' disabled>Selecciona un monto:</option>
                                 {dataVentaBob.length > 0 ?
                                     (
                                         dataVentaBob.slice().reverse().map((item, index) => (
-                                            <option key={index} value={item}>[{dataVentaBob.length - index}] Bob - {item}</option>
+                                            <option key={index} value={item} className='text-gray-600'>[{dataVentaBob.length - index}] Bob - {item}</option>
                                         ))
                                     ) : (<>ola</>)
                                 }
@@ -515,22 +518,24 @@ export const Plantilla = () => {
                     ) : (<></>)}
                     {paisInicial == "Bolivia" ? (
                         <div style={{ display: 'flex', flexDirection: 'row', gap: '10px' }}>
-                            <select defaultValue={10} onChange={(e) => setCotizacionBinanceCompra(e.target.value)}>
+                            <select defaultValue={10} onChange={(e) => setCotizacionBinanceCompra(e.target.value)}
+                                className="p-3 border border-gray-300 rounded-md shadow-sm">
                                 <option value='0' disabled>Selecciona un monto:</option>
                                 {dataVentaArs.length > 0 ?
                                     (
                                         dataVentaArs.slice().reverse().map((item, index) => (
-                                            <option key={index} value={item}>[{dataVentaArs.length - index}] Ars - {item}</option>
+                                            <option key={index} value={item} className='text-gray-600'>[{dataVentaArs.length - index}] Ars - {item}</option>
                                         ))
                                     ) : (<>ola</>)
                                 }
                             </select>
-                            <select defaultValue={10} onChange={(e) => setCotizacionBinanceVenta(e.target.value)}>
+                            <select defaultValue={10} onChange={(e) => setCotizacionBinanceVenta(e.target.value)}
+                                className="p-3 border border-gray-300 rounded-md shadow-sm">
                                 <option value='0' disabled>Selecciona un monto:</option>
                                 {dataCompraBob.length > 0 ?
                                     (
                                         dataCompraBob.slice().reverse().map((item, index) => (
-                                            <option key={index} value={item}>[{dataCompraBob.length - index}] Bob - {item}</option>
+                                            <option key={index} value={item} className='text-gray-600'>[{dataCompraBob.length - index}] Bob - {item}</option>
                                         ))
                                     ) : (<>ola</>)
                                 }
@@ -546,6 +551,7 @@ export const Plantilla = () => {
                         type="number"
                         value={monto}
                         onChange={(e) => setMonto(e.target.value)}
+                        className='p-3 border border-gray-300 rounded-md shadow-sm'
                     />
                 </div>
 
@@ -555,16 +561,16 @@ export const Plantilla = () => {
                 <div onWheel={(e) => e.target.blur()} style={{ display: 'flex', flexDirection: 'row', gap: '10px' }}>
                     <div style={{ display: 'flex', flexDirection: 'column', gap: '10px' }}>
                         <label htmlFor="comision">Comision cambiaria en %</label>
-                        <input id='comision' type="number" value={comision} onChange={(e) => setComision(e.target.value)}></input>
+                        <input id='comision' type="number" value={comision} onChange={(e) => setComision(e.target.value)} className='p-3 border border-gray-300 rounded-md shadow-sm'></input>
                     </div>
                     <div style={{ display: 'flex', flexDirection: 'column', gap: '10px' }}>
                         <label htmlFor="comision">Comision Visible en %</label>
-                        <input id='comision' type="number" value={comisionVisible} onChange={(e) => setComisionVisible(e.target.value)}></input>
+                        <input id='comision' type="number" value={comisionVisible} onChange={(e) => setComisionVisible(e.target.value)} className='p-3 border border-gray-300 rounded-md shadow-sm'></input>
                     </div>                    
                 </div>
 
             </div>
-            <div style={{ border: '1px solid white', padding: '10px', margin: '10px', borderRadius: '10px' }}>
+            <div className='flex flex-col items-center gap-3 mt-5 border border-gray-300 rounded-md p-5 shadow-sm'>
                 <h2>Usuario que hace la venta: {usuario}</h2>
                 <h2>Se cambiarán: {paisInicial} a {cambios}</h2>
                 <h2>El banco será: {paisInicial === "Bolivia" ? bancoBob : bancoArs}</h2>
