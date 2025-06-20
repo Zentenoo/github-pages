@@ -140,7 +140,7 @@ const Exportar = ({
               paisInicial === "Bolivia" ? (
                 bancoBob === "Banco Ganadero" ? (
                   <div>
-                    <h4>USA ESTE QR PARA FACILITARTE:</h4>
+                    <h4 className="mb-1">USA ESTE QR PARA FACILITARTE:</h4>
                     <img
                       src={`${import.meta.env.BASE_URL}Zegers Banco Ganadero.jpg`}
                       alt="QR Code"
@@ -150,7 +150,7 @@ const Exportar = ({
 
                 ) : (
                   <div>
-                    <h4>USA ESTE QR PARA FACILITARTE:</h4>
+                    <h4 className="mb-1">USA ESTE QR PARA FACILITARTE:</h4>
                     <img
                       src={`${import.meta.env.BASE_URL}Zegers Yape.jpg`}
                       alt="QR Code"
@@ -240,7 +240,7 @@ const Exportar = ({
               paisInicial === "Bolivia" ? (
                 bancoBob === "Banco Ganadero" ? (
                   <div>
-                    <h4>USA ESTE QR PARA FACILITARTE:</h4>
+                    <h4 className="mb-1">USA ESTE QR PARA FACILITARTE:</h4>
                     <img
                       src={`${import.meta.env.BASE_URL}Nacho Banco Ganadero.jpg`}
                       alt="QR Code"
@@ -249,7 +249,7 @@ const Exportar = ({
                   </div>
                 ) : (
                   <div>
-                    <h4>USA ESTE QR PARA FACILITARTE:</h4>
+                    <h4 className="mb-1">USA ESTE QR PARA FACILITARTE:</h4>
                     <img
                       src={`${import.meta.env.BASE_URL}Nacho Banco Ganadero.jpg`}
                       alt="QR Code"
