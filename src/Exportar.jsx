@@ -61,7 +61,6 @@ const Exportar = ({
           padding: "0px",
           marginTop: "20px",
           minWidth: "800px",
-          minHeight: "600px",
           transform: "scale(1)",
           alignItems: "center",
           justifyContent: "center",

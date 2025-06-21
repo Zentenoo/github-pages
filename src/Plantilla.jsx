@@ -318,7 +318,7 @@ export const Plantilla = () => {
     
 
     return (
-        <div className='flex flex-col items-center'>
+        <div className='flex flex-col'>
             <div style={{ display: 'flex', flexDirection: 'column', alignItems: 'center', gap: '10px' }}>
                 <select name="usuario" id="usuario" onChange={(e) => { setUsuario(e.target.value); setBancoArs(''); setBancoBob('') }} value={usuario}
                     className="p-3 border border-gray-300 rounded-md shadow-sm">
@@ -607,7 +607,7 @@ export const Plantilla = () => {
                 </div>
 
             </div>
-            <div className='flex flex-col items-center gap-3 mt-5 mb-5 border border-gray-300 rounded-md shadow-sm'>
+            <div className='flex flex-col max-w-xl mx-auto items-center gap-3 mt-5 mb-5 border border-gray-300 rounded-md shadow-sm'>
                 <h2>Usuario que hace la venta: {usuario}</h2>
                 <h2>Se cambiarán: {paisInicial} a {cambios}</h2>
                 <h2>El banco será: {paisInicial === "Bolivia" ? bancoBob : bancoArs}</h2>
