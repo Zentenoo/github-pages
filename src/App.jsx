@@ -34,7 +34,7 @@ function App() {
 
   return (
     <>
-      <h1 className="read-the-docs">
+      <h1 className="read-the-docs text-[2em] lg:text-[3.2em] lg:leading-[1.1] ">
         EconoTransfer
       </h1>
       <div style={{display: 'flex', justifyContent:"center",marginBottom:"10px"}} className="flex items-center gap-3 mb-5">
@@ -51,76 +51,78 @@ function App() {
           </div>
         </label>
       </div>
-      {tablasVisibles === true ? (
-        <div style={{ display: 'flex', flexDirection: 'row', gap: '20px' }}>
-          <div style={{ display: 'flex', flexDirection: 'column' }}>
-            <div className="data-section">
-              <h2>Datos de Compra Bob </h2>
-              {dataCompraBob.length === 0 && <p>No hay datos disponibles</p>}
-              <ul>
-                {dataCompraBob.map((item, index) => (
-                  <li key={index}>
-                    {`Precio: ${item}`}
-                  </li>
-                ))}
-              </ul>
+      <div className='flex flex-col items-center'>
+        {tablasVisibles === true ? (
+          <div className='flex flex-row gap-5'>
+            <div style={{ display: 'flex', flexDirection: 'column' }}>
+              <div className="data-section border rounded-md border-gray-300">
+                <h2>Datos de Compra Bob </h2>
+                {dataCompraBob.length === 0 && <p>No hay datos disponibles</p>}
+                <ul>
+                  {dataCompraBob.map((item, index) => (
+                    <li key={index}>
+                      {`Precio: ${item}`}
+                    </li>
+                  ))}
+                </ul>
+              </div>
+              <div className="data-section border rounded-md border-gray-300">
+                <h2>Datos de Venta Bob</h2>
+                {dataVentaBob.length === 0 && <p>No hay datos disponibles</p>}
+                <ul>
+                  {dataVentaBob.map((item, index) => (
+                    <li key={index}> Precio: {item}</li>
+                  ))}
+                </ul>
+              </div>
             </div>
-            <div className="data-section">
-              <h2>Datos de Venta Bob</h2>
-              {dataVentaBob.length === 0 && <p>No hay datos disponibles</p>}
-              <ul>
-                {dataVentaBob.map((item, index) => (
-                  <li key={index}> Precio: {item}</li>
-                ))}
-              </ul>
+            <div style={{ display: 'flex', flexDirection: 'column' }}>
+              <div className="data-section border rounded-md border-gray-300">
+                <h2>Datos de Venta Ars</h2>
+                {dataArs.length === 0 && <p>No hay datos disponibles</p>}
+                <ul>
+                  {dataArs.map((item, index) => (
+                    <li key={index}> Precio: {item}</li>
+                  ))}
+                </ul>
+              </div>
+              <div className="data-section border rounded-md border-gray-300">
+                <h2>Datos de Compra Ars</h2>
+                {dataCompraArs.length === 0 && <p>No hay datos disponibles</p>}
+                <ul>
+                  {dataCompraArs.map((item, index) => (
+                    <li key={index}> Precio: {item}</li>
+                  ))}
+                </ul>
+              </div>
             </div>
+            {/* <div style={{ display: 'flex', flexDirection: 'column' }}>
+              <div className="data-section border rounded-md border-gray-300">
+                <h2>Datos de Venta Brl</h2>
+                {dataVentaBrl.length === 0 && <p>No hay datos disponibles</p>}
+                <ul>
+                  {dataVentaBrl.map((item, index) => (
+                    <li key={index}> Precio: {item}</li>
+                  ))}
+                </ul>
+              </div>
+              <div className="data-section border rounded-md border-gray-300">
+                <h2>Datos de Compra Brl</h2>
+                {dataCompraBob.length === 0 && <p>No hay datos disponibles</p>}
+                <ul>
+                  {dataCompraBrl.map((item, index) => (
+                    <li key={index}> Precio: {item}</li>
+                  ))}
+                </ul>
+              </div>
+            </div> */}
           </div>
-          <div style={{ display: 'flex', flexDirection: 'column' }}>
-            <div className="data-section">
-              <h2>Datos de Venta Ars</h2>
-              {dataArs.length === 0 && <p>No hay datos disponibles</p>}
-              <ul>
-                {dataArs.map((item, index) => (
-                  <li key={index}> Precio: {item}</li>
-                ))}
-              </ul>
-            </div>
-            <div className="data-section">
-              <h2>Datos de Compra Ars</h2>
-              {dataCompraArs.length === 0 && <p>No hay datos disponibles</p>}
-              <ul>
-                {dataCompraArs.map((item, index) => (
-                  <li key={index}> Precio: {item}</li>
-                ))}
-              </ul>
-            </div>
-          </div>
-          <div style={{ display: 'flex', flexDirection: 'column' }}>
-            <div className="data-section">
-              <h2>Datos de Venta Brl</h2>
-              {dataVentaBrl.length === 0 && <p>No hay datos disponibles</p>}
-              <ul>
-                {dataVentaBrl.map((item, index) => (
-                  <li key={index}> Precio: {item}</li>
-                ))}
-              </ul>
-            </div>
-            <div className="data-section">
-              <h2>Datos de Compra Brl</h2>
-              {dataCompraBob.length === 0 && <p>No hay datos disponibles</p>}
-              <ul>
-                {dataCompraBrl.map((item, index) => (
-                  <li key={index}> Precio: {item}</li>
-                ))}
-              </ul>
-            </div>
-          </div>
-        </div>
-      ) : (
-        ""
-      )}
+        ) : (
+          ""
+        )}
+      </div>
 
-      <div>
+      <div className='mt-5'>
         <Plantilla />
       </div>
     </>

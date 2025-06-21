@@ -318,7 +318,7 @@ export const Plantilla = () => {
     
 
     return (
-        <div>
+        <div className='flex flex-col items-center'>
             <div style={{ display: 'flex', flexDirection: 'column', alignItems: 'center', gap: '10px' }}>
                 <select name="usuario" id="usuario" onChange={(e) => { setUsuario(e.target.value); setBancoArs(''); setBancoBob('') }} value={usuario}
                     className="p-3 border border-gray-300 rounded-md shadow-sm">
@@ -326,7 +326,7 @@ export const Plantilla = () => {
                     <option className='text-gray-600' value="Zeggers">Zeggers</option>
                     <option className='text-gray-600' value="Nacho">Nacho</option>
                 </select>
-                <div>
+                <div className='border border-gray-300 rounded-md shadow-sm p-5'>
                     <h4>País Inicial</h4>
                     <label style={{ marginRight: '10px' }}>
                         <input
@@ -347,7 +347,8 @@ export const Plantilla = () => {
                         Argentina
                     </label>
                 </div>
-                {paisInicial ? <div>
+                {paisInicial ? 
+                <div className='border border-gray-300 rounded-md shadow-sm p-5'>
                     <h4>CASO</h4>
                     <label style={{ marginRight: '10px' }}>
                         <input
@@ -377,121 +378,157 @@ export const Plantilla = () => {
                         BOB
                     </label>
                 </div> : <></>}
-                {usuario == "Zeggers" && paisInicial == "Bolivia" ? <div>
+                {usuario == "Zeggers" && paisInicial == "Bolivia" ? 
+                <div className='border border-gray-300 rounded-md shadow-sm p-5'>
                     <h4>Banco Boliviano que figurará la cotización</h4>
-                    <label style={{ marginRight: '10px' }}>
-                        <input
-                            type="radio"
-                            value="Banco Ganadero"
-                            checked={bancoBob === 'Banco Ganadero'}
-                            onChange={(e) => setBancoBob(e.target.value)}
-                        />
-                        Banco Ganadero
-                    </label>
-                    <label style={{ marginRight: '10px' }}>
-                        <input
-                            type="radio"
-                            value="Banco Credito"
-                            checked={bancoBob === 'Banco Credito'}
-                            onChange={(e) => setBancoBob(e.target.value)}
-                        />
-                        Banco Credito
-                    </label>
+                    <div className='flex justify-center'>
+                        <div className='flex flex-col gap-3 items-start'>
+                            <label style={{ marginRight: '10px' }}>
+                                <input
+                                    type="radio"
+                                    value="Banco Ganadero"
+                                    checked={bancoBob === 'Banco Ganadero'}
+                                    onChange={(e) => setBancoBob(e.target.value)}
+                                />
+                                Banco Ganadero
+                            </label>
+                            <label style={{ marginRight: '10px' }}>
+                                <input
+                                    type="radio"
+                                    value="Banco Credito"
+                                    checked={bancoBob === 'Banco Credito'}
+                                    onChange={(e) => setBancoBob(e.target.value)}
+                                />
+                                Banco Credito
+                            </label>
+                        </div>
+                    </div>
                 </div> : <></>}
-                {usuario == "Zeggers" && paisInicial == "Argentina" ? <div>
+                {usuario == "Zeggers" && paisInicial == "Argentina" ? 
+                <div className='border border-gray-300 rounded-md shadow-sm p-5'>
                     <h4>Banco Argentino que figurará la cotización</h4>
-                    <label style={{ marginRight: '10px' }}>
-                        <input
-                            type="radio"
-                            value="Mercado Pago"
-                            checked={bancoArs === 'Mercado Pago'}
-                            onChange={(e) => setBancoArs(e.target.value)}
-                        />
-                        Mercado Pago
-                    </label>
-                    <label style={{ marginRight: '10px' }}>
-                        <input
-                            type="radio"
-                            value="banco lemon"
-                            checked={bancoArs === 'banco lemon'}
-                            onChange={(e) => setBancoArs(e.target.value)}
-                        />
-                        Banco Lemon
-                    </label>
-                    <label style={{ marginRight: '10px' }}>
-                        <input
-                            type="radio"
-                            value="Banco Ualá"
-                            checked={bancoArs === 'Banco Ualá'}
-                            onChange={(e) => setBancoArs(e.target.value)}
-                        />
-                        Banco Ualá
-                    </label>
-                    <label style={{ marginRight: '10px' }}>
-                        <input
-                            type="radio"
-                            value="Banco Brubank"
-                            checked={bancoArs === 'Banco Brubank'}
-                            onChange={(e) => setBancoArs(e.target.value)}
-                        />
-                        Banco Brubank
-                    </label>
-                    <label style={{ marginRight: '10px' }}>
-                        <input
-                            type="radio"
-                            value="Banco Galicia"
-                            checked={bancoArs === 'Banco Galicia'}
-                            onChange={(e) => setBancoArs(e.target.value)}
-                        />
-                        Banco Galicia
-                    </label>
+                    <div className='flex justify-center'>
+                        <div className='flex flex-col gap-3 items-start'>
+                            <label style={{ marginRight: '10px' }}>
+                                <input
+                                    type="radio"
+                                    value="Mercado Pago"
+                                    checked={bancoArs === 'Mercado Pago'}
+                                    onChange={(e) => setBancoArs(e.target.value)}
+                                />
+                                Mercado Pago
+                            </label>
+                            <label style={{ marginRight: '10px' }}>
+                                <input
+                                    type="radio"
+                                    value="banco lemon"
+                                    checked={bancoArs === 'banco lemon'}
+                                    onChange={(e) => setBancoArs(e.target.value)}
+                                />
+                                Banco Lemon
+                            </label>
+                            <label style={{ marginRight: '10px' }}>
+                                <input
+                                    type="radio"
+                                    value="Banco Ualá"
+                                    checked={bancoArs === 'Banco Ualá'}
+                                    onChange={(e) => setBancoArs(e.target.value)}
+                                />
+                                Banco Ualá
+                            </label>
+                            <label style={{ marginRight: '10px' }}>
+                                <input
+                                    type="radio"
+                                    value="Banco Brubank"
+                                    checked={bancoArs === 'Banco Brubank'}
+                                    onChange={(e) => setBancoArs(e.target.value)}
+                                />
+                                Banco Brubank
+                            </label>
+                            <label style={{ marginRight: '10px' }}>
+                                <input
+                                    type="radio"
+                                    value="Banco Galicia"
+                                    checked={bancoArs === 'Banco Galicia'}
+                                    onChange={(e) => setBancoArs(e.target.value)}
+                                />
+                                Banco Galicia
+                            </label>                          
+                        </div>
+                    </div>
                 </div> : <></>}
                 {usuario == "Nacho" && paisInicial == "Bolivia" ? <div>
                     <h4>Banco Boliviano que figurará la cotización</h4>
-                    <label style={{ marginRight: '10px' }}>
-                        <input
-                            type="radio"
-                            value="Banco Ganadero"
-                            checked={bancoBob === 'Banco Ganadero'}
-                            onChange={(e) => setBancoBob(e.target.value)}
-                        />
-                        Banco Ganadero
-                    </label>
+                    <div className='flex justify-center'>
+                        <div className='flex flex-col gap-3 items-start'>
+                            <label style={{ marginRight: '10px' }}>
+                                <input
+                                    type="radio"
+                                    value="Banco Mercantil"
+                                    checked={bancoBob === 'Banco Mercantil'}
+                                    onChange={(e) => setBancoBob(e.target.value)}
+                                />
+                                Banco Mercantil
+                            </label>
+                            <label style={{ marginRight: '10px' }}>
+                                <input
+                                    type="radio"
+                                    value="Banco Ganadero"
+                                    checked={bancoBob === 'Banco Ganadero'}
+                                    onChange={(e) => setBancoBob(e.target.value)}
+                                />
+                                Banco Ganadero
+                            </label>
+                            <label style={{ marginRight: '10px' }}>
+                                <input
+                                    type="radio"
+                                    value="Banco BCP"
+                                    checked={bancoBob === 'Banco BCP'}
+                                    onChange={(e) => setBancoBob(e.target.value)}
+                                />
+                                Banco BCP
+                            </label>
+                        </div>
+                    </div>
                 </div> : <></>}
                 {usuario == "Nacho" && paisInicial == "Argentina" ? <div>
                     <h4>Banco Argentino que figurará la cotización</h4>
-                    <label style={{ marginRight: '10px' }}>
-                        <input
-                            type="radio"
-                            value="Mercado Pago"
-                            checked={bancoArs === 'Mercado Pago'}
-                            onChange={(e) => setBancoArs(e.target.value)}
-                        />
-                        Mercado Pago
-                    </label>
-                    <label style={{ marginRight: '10px' }}>
-                        <input
-                            type="radio"
-                            value="Banco Ualá"
-                            checked={bancoArs === 'Banco Ualá'}
-                            onChange={(e) => setBancoArs(e.target.value)}
-                        />
-                        Banco Ualá
-                    </label>
-                    <label style={{ marginRight: '10px' }}>
-                        <input
-                            type="radio"
-                            value="banco lemon"
-                            checked={bancoArs === 'banco lemon'}
-                            onChange={(e) => setBancoArs(e.target.value)}
-                        />
-                        Banco Lemon
-                    </label>
+                    <div className='flex justify-center'>
+                        <div className='flex flex-col gap-3 items-start'>
+                            <label style={{ marginRight: '10px' }}>
+                                <input
+                                    type="radio"
+                                    value="Mercado Pago"
+                                    checked={bancoArs === 'Mercado Pago'}
+                                    onChange={(e) => setBancoArs(e.target.value)}
+                                />
+                                Mercado Pago
+                            </label>
+                            <label style={{ marginRight: '10px' }}>
+                                <input
+                                    type="radio"
+                                    value="Banco Ualá"
+                                    checked={bancoArs === 'Banco Ualá'}
+                                    onChange={(e) => setBancoArs(e.target.value)}
+                                />
+                                Banco Ualá
+                            </label>
+                            <label style={{ marginRight: '10px' }}>
+                                <input
+                                    type="radio"
+                                    value="banco lemon"
+                                    checked={bancoArs === 'banco lemon'}
+                                    onChange={(e) => setBancoArs(e.target.value)}
+                                />
+                                Banco Lemon
+                            </label>
+                        </div>
+                    </div>
                 </div> : <></>}
                 <div>
                     <h4>Cotización Binance</h4>
                     {paisInicial == "Argentina" ? (
-                        <div style={{ display: 'flex', flexDirection: 'row', gap: '10px' }}>
+                        <div className='flex flex-col gap-5'>
                             <select defaultValue={10} onChange={(e) => setCotizacionBinanceCompra(e.target.value)}
                                 className="p-3 border border-gray-300 rounded-md shadow-sm">
                                 <option value='0' disabled>Selecciona un monto:</option>
@@ -517,7 +554,7 @@ export const Plantilla = () => {
                         </div>
                     ) : (<></>)}
                     {paisInicial == "Bolivia" ? (
-                        <div style={{ display: 'flex', flexDirection: 'row', gap: '10px' }}>
+                        <div className='flex flex-col gap-5'>
                             <select defaultValue={10} onChange={(e) => setCotizacionBinanceCompra(e.target.value)}
                                 className="p-3 border border-gray-300 rounded-md shadow-sm">
                                 <option value='0' disabled>Selecciona un monto:</option>
@@ -558,7 +595,7 @@ export const Plantilla = () => {
                 <button onClick={Calcular}>
                     Calcular
                 </button>
-                <div onWheel={(e) => e.target.blur()} style={{ display: 'flex', flexDirection: 'row', gap: '10px' }}>
+                <div onWheel={(e) => e.target.blur()} style={{ display: 'flex', flexDirection: 'column', gap: '10px' }}>
                     <div style={{ display: 'flex', flexDirection: 'column', gap: '10px' }}>
                         <label htmlFor="comision">Comision cambiaria en %</label>
                         <input id='comision' type="number" value={comision} onChange={(e) => setComision(e.target.value)} className='p-3 border border-gray-300 rounded-md shadow-sm'></input>
@@ -570,7 +607,7 @@ export const Plantilla = () => {
                 </div>
 
             </div>
-            <div className='flex flex-col items-center gap-3 mt-5 border border-gray-300 rounded-md p-5 shadow-sm'>
+            <div className='flex flex-col items-center gap-3 mt-5 mb-5 border border-gray-300 rounded-md shadow-sm'>
                 <h2>Usuario que hace la venta: {usuario}</h2>
                 <h2>Se cambiarán: {paisInicial} a {cambios}</h2>
                 <h2>El banco será: {paisInicial === "Bolivia" ? bancoBob : bancoArs}</h2>

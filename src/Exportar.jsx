@@ -49,17 +49,22 @@ const Exportar = ({
   };
 
   return (
-    <div>
+    <div className=''>
       <button onClick={exportToImage}>Exportar como Imagen</button>
       <div
         ref={tableRef}
         style={{
-          width: "650px",
           backgroundColor: "#001b36",
           color: "#fff",
           fontFamily: "Arial, sans-serif",
           borderCollapse: "collapse",
           padding: "0px",
+          marginTop: "20px",
+          minWidth: "800px",
+          minHeight: "600px",
+          transform: "scale(1)",
+          alignItems: "center",
+          justifyContent: "center",
         }}
       >
         <h2 style={{ textAlign: "center", margin: "0px", padding: "5px" }}>COTIZACIONES</h2>
@@ -247,16 +252,25 @@ const Exportar = ({
                       style={{ width: "300px", height: "300px" }}
                     />
                   </div>
-                ) : (
+                ) : bancoBob === "Banco BCP" ? (
                   <div>
                     <h4 className="mb-1">USA ESTE QR PARA FACILITARTE:</h4>
                     <img
-                      src={`${import.meta.env.BASE_URL}Nacho Banco Ganadero.jpg`}
+                      src={`${import.meta.env.BASE_URL}Nacho Banco BCP.jpg`}
                       alt="QR Code"
                       style={{ width: "300px", height: "300px" }}
                     />
                   </div>
-                )
+                ) :  (
+                  <div>
+                    <h4 className="mb-1">USA ESTE QR PARA FACILITARTE:</h4>
+                    <img
+                      src={`${import.meta.env.BASE_URL}Nacho Banco Mercantil.jpg`}
+                      alt="QR Code"
+                      style={{ width: "300px", height: "300px" }}
+                    />
+                  </div>
+                ) 
               ) : (
                 (bancoArs === "Mercado Pago") ? (
                   <div style={{ display: "flex", flexDirection: "column", alignItems: "center", gap: "0px" }}>
