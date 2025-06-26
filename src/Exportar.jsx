@@ -64,6 +64,9 @@ const Exportar = ({
           transform: "scale(1)",
           alignItems: "center",
           justifyContent: "center",
+          maxWidth: "600px",
+          marginRight: "auto",
+          marginLeft: "auto",
         }}
       >
         <h2 style={{ textAlign: "center", margin: "0px", padding: "5px" }}>COTIZACIONES</h2>
