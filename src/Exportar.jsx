@@ -128,7 +128,7 @@ const Exportar = ({
           </tbody>
         </table>
 
-        <h3 style={{ backgroundColor: "#e6ad00", color: "white", padding: "2px", textAlign: "center", margin: "0px" }}>TOTAL A PAGAR EN: {paisInicial==="Bolivia"? "Bs." : "ARS"} {total}</h3>
+        <h3 style={{ backgroundColor: "#e6ad00", color: "white", padding: "2px", textAlign: "center", margin: "0px" }}><strong>TOTAL A PAGAR EN: {paisInicial==="Bolivia"? "Bs." : "ARS"} {total}</strong></h3>
 
         <table style={{ width: "100%", borderCollapse: "collapse" }}>
           <tbody>
