@@ -1,22 +1,38 @@
-import { useRef } from "react";
+import { useRef, useMemo } from "react";
 import PropTypes from "prop-types";
 import html2canvas from "html2canvas";
 
 const Exportar = ({
   usuario,
   paisInicial,
+  cambios,
   bancoBob,
   bancoArs,
   monto,
   comisionVisible,
   cotizacionBinanceCompra,
+  cotizacionBinanceVenta,
   cotizacionDescuento,
   recibe,
+  paganSinComision,
+  paganConComision,
   total,
 }) => {
   const tableRef = useRef(null);
 
+  // Helpers seguros (evita NaN)
+  const toNumber = (v) => {
+    const n = typeof v === "string" ? Number(v.replace(",", ".")) : Number(v);
+    return Number.isFinite(n) ? n : 0;
+  };
+
+  const fmt0 = (n) => new Intl.NumberFormat("es-ES", { maximumFractionDigits: 0 }).format(n);
+  const fmt2 = (n) =>
+    new Intl.NumberFormat("es-ES", { minimumFractionDigits: 2, maximumFractionDigits: 2 }).format(n);
+
   const exportToImage = () => {
+    if (!tableRef.current) return;
+
     html2canvas(tableRef.current, {
       scale: 3,
       backgroundColor: "#011b36",
@@ -29,30 +45,65 @@ const Exportar = ({
     });
   };
 
-  /* ========= ESTILOS ========= */
+  // ====== Datos de destino/origen para etiquetas ======
+  const destinoNombre = paisInicial === "Bolivia" ? "ARGENTINA" : "BOLIVIA";
+  const monedaDestino = paisInicial === "Bolivia" ? "ARS" : "Bs";
+  const monedaPago = paisInicial === "Bolivia" ? "Bs" : "ARS";
+
+  // Top: monto que recibe (destino)
+  const recibeN = useMemo(() => toNumber(recibe), [recibe]);
+  // Bottom: total a pagar (origen)
+  const totalN = useMemo(() => toNumber(total), [total]);
+
+  // Comisión (monto que mostrás a la derecha)
+  // En tu lógica original, paganConComision es el número que ponías en la fila de comisión.
+  // Lo normalizo para evitar NaN.
+  const comisionMontoN = useMemo(() => toNumber(paganConComision), [paganConComision]);
+
+  // Tipos de cambio
+  const tcBsUsd = useMemo(() => toNumber(cotizacionBinanceCompra), [cotizacionBinanceCompra]);
+  const tcArsUsd = useMemo(() => toNumber(cotizacionDescuento), [cotizacionDescuento]);
+
+  /* ================= ESTILOS ================= */
 
   const cardStyle = {
-    backgroundColor: "#0f315e",
-    border: "2px solid #1c4780",
-    borderRadius: "18px",
-    padding: "20px",
+  backgroundColor: "#0f315e",
+  border: "2px solid #1c4780",
+  borderRadius: "22px",
+  padding: "26px 28px",
+  height: "230px",
   };
 
-  const title = {
+  const titleLeft = {
     color: "#ffffff",
-    fontSize: "20px",
+    fontSize: "26px",
+    fontWeight: 700,
     margin: 0,
+    textAlign: "left",
   };
 
-  const big = {
+  const bigLeft = {
     color: "#ffffff",
-    fontSize: "40px",
-    fontWeight: "bold",
+    fontSize: "56px",
+    fontWeight: 800,
+    margin: "10px 0 0 0",
+    textAlign: "left",
+    letterSpacing: "0.5px",
   };
 
-  const gray = {
+  const smallGray = {
     color: "#bbbbbb",
-    fontSize: "14px",
+    fontSize: "16px",
+    marginTop: "16px",
+    textAlign: "left",
+  };
+
+  const rateRow = {
+    display: "flex",
+    justifyContent: "space-between",
+    marginTop: "8px",
+    color: "#bbbbbb",
+    fontSize: "16px",
   };
 
   return (
@@ -63,190 +114,273 @@ const Exportar = ({
         ref={tableRef}
         style={{
           backgroundColor: "#011b36",
-          padding: "30px",
-          width: "800px",
+          padding: "40px",
+          width: "820px",
           margin: "20px auto",
           fontFamily: "Arial, sans-serif",
         }}
       >
-        {/* ===== CARD SUPERIOR ===== */}
-        <div style={cardStyle}>
-          <h3 style={title}>Quiero transferir</h3>
+        {/* ========= BLOQUE SOLO DE LOS DOS RECTÁNGULOS (para posicionar bien el logo) ========= */}
+        <div style={{ position: "relative" }}>
+          {/* ======= CARD 1: MONTO QUE RECIBE ======= */}
+          <div style={{ ...cardStyle, position: "relative" }}>
+            {/* Bandera derecha (destino) */}
+            <img
+              src={
+                paisInicial === "Bolivia"
+                  ? `${import.meta.env.BASE_URL}argentina.png`
+                  : `${import.meta.env.BASE_URL}bolivia.png`
+              }
+              alt="Bandera destino"
+              style={{
+                position: "absolute",
+                right: "28px",
+                top: "28px",
+                width: "78px",
+                height: "52px",
+                borderRadius: "4px",
+              }}
+            />
 
-          <div style={big}>
-            {new Intl.NumberFormat("es-ES").format(monto)}{" "}
-            {paisInicial === "Bolivia" ? "Bs" : "ARS"}
+            <div style={titleLeft}>Monto que recibe</div>
+
+            <div style={bigLeft}>
+              {fmt0(recibeN)} {monedaDestino}
+            </div>
+
+            {/* Tipos de cambio (como referencia: label + 2 valores en la misma línea) */}
+            <div style={smallGray}>Tipos de cambio</div>
+            <div style={rateRow}>
+              <span>{fmt2(tcBsUsd)} Bs/USD</span>
+              <span>{fmt2(tcArsUsd)} ARS/USD</span>
+            </div>
           </div>
 
-          <p style={gray}>
-            Recibe en {paisInicial === "Bolivia" ? "ARGENTINA" : "BOLIVIA"}:{" "}
-            {recibe} {paisInicial === "Bolivia" ? "ARS" : "Bs"}
-          </p>
-
-          {/* Tipos de cambio en una sola línea */}
+          {/* ===== LOGO SUPERPUESTO ENTRE RECTÁNGULOS ===== */}
           <div
             style={{
+              width: "135px",
+              height: "135px",
+              borderRadius: "50%",
+              backgroundColor: "#011b36",
+              border: "3px solid #1c4780",
+              position: "absolute",
+              left: "50%",
+              top: "50%",                        
+              transform: "translate(-50%, -50%)",
               display: "flex",
-              justifyContent: "space-between",
-              marginTop: "10px",
+              alignItems: "center",
+              justifyContent: "center",
+              zIndex: 10,
             }}
           >
-            <span style={gray}>
-              {cotizacionBinanceCompra} Bs/USD
-            </span>
-            <span style={gray}>
-              {cotizacionDescuento} ARS/USD
-            </span>
+
+            <img
+              src={`${import.meta.env.BASE_URL}Logo.png`}
+              alt="Econotransfer"
+              style={{
+                width: "86px",
+                transform: "rotate(-90deg)",
+              }}
+            />
+          </div>
+
+          {/* Separación real entre cards para que el logo quede entre medio */}
+          <div style={{ height: "78px" }} />
+
+          {/* ======= CARD 2: TOTAL A PAGAR ======= */}
+          <div style={{ ...cardStyle, position: "relative" }}>
+            {/* Bandera derecha (origen) */}
+            <img
+              src={
+                paisInicial === "Bolivia"
+                  ? `${import.meta.env.BASE_URL}bolivia.png`
+                  : `${import.meta.env.BASE_URL}argentina.png`
+              }
+              alt="Bandera origen"
+              style={{
+                position: "absolute",
+                right: "28px",
+                top: "28px",
+                width: "78px",
+                height: "52px",
+                borderRadius: "4px",
+              }}
+            />
+
+            <div style={titleLeft}>Total a pagar</div>
+
+            <div style={bigLeft}>
+              {fmt2(totalN)} {monedaPago}
+            </div>
+
+            {/* Comisión: izquierda texto, derecha monto (misma línea) */}
+            <div style={{ display: "flex", justifyContent: "space-between", marginTop: "16px" }}>
+              <span style={{ ...smallGray, marginTop: 0 }}>
+                Comisión incluida: {comisionVisible}%
+              </span>
+              <span style={{ ...smallGray, marginTop: 0 }}>
+                {fmt2(comisionMontoN)} {monedaPago}
+              </span>
+            </div>
           </div>
         </div>
 
-        {/* ===== LOGO CENTRAL ===== */}
-        <div
-          style={{
-            width: "120px",
-            height: "120px",
-            borderRadius: "50%",
-            border: "3px solid #1c4780",
-            backgroundColor: "#011b36",
-            display: "flex",
-            alignItems: "center",
-            justifyContent: "center",
-            margin: "20px auto",
-          }}
-        >
-          <img
-            src={`${import.meta.env.BASE_URL}Logo.png`}
-            alt="Econotransfer"
+        {/* ======= BANCOS (SIN RECTÁNGULO) ======= */}
+        <div style={{ marginTop: "26px", textAlign: "center" }}>
+          <div
             style={{
-              width: "80px",
-              transform: "rotate(-90deg)",
+              color: "#ffffff",
+              fontSize: "34px",
+              fontWeight: 800,
+              marginBottom: "14px",
             }}
-          />
-        </div>
-
-        {/* ===== CARD INFERIOR ===== */}
-        <div style={cardStyle}>
-          <h3 style={title}>Total a pagar</h3>
-
-          <div style={big}>
-            {total} {paisInicial === "Bolivia" ? "Bs" : "ARS"}
+          >
+            Utiliza este banco
           </div>
 
-          <p style={gray}>Comisión incluida: {comisionVisible}%</p>
+          <div style={{ display: "flex", justifyContent: "center", gap: "40px", color: "#ffffff" }}>
+            {/* === LÓGICA DE BANCOS ORIGINAL (MISMA ESTRUCTURA) === */}
+            {usuario === "Zeggers" ? (
+              paisInicial === "Bolivia" ? (
+                bancoBob === "Banco Ganadero" ? (
+                  <img
+                    src={`${import.meta.env.BASE_URL}Zegers Banco Ganadero.jpg`}
+                    alt="QR Zegers Banco Ganadero"
+                    style={{ width: "320px", height: "320px" }}
+                  />
+                ) : (
+                  <img
+                    src={`${import.meta.env.BASE_URL}Zegers Yape.jpg`}
+                    alt="QR Zegers Yape"
+                    style={{ width: "320px", height: "320px" }}
+                  />
+                )
+              ) : bancoArs === "Mercado Pago" ? (
+                <p style={{ textAlign: "left" }}>
+                  SANTIAGO ZEGERS BRIANCON
+                  <br />
+                  DNI: 96081178
+                  <br />
+                  Alias: szegersb
+                  <br />
+                  CBU: 0000003100068509876137
+                  <br />
+                  Mercado Pago
+                </p>
+              ) : bancoArs === "Banco Ualá" ? (
+                <p style={{ textAlign: "left" }}>
+                  SANTIAGO ZEGERS BRIANCON
+                  <br />
+                  DNI: 96081178
+                  <br />
+                  Alias: zegerssantiagob.uala
+                  <br />
+                  CBU: 0000007900209608117808
+                  <br />
+                  Banco Ualá
+                </p>
+              ) : bancoArs === "banco lemon" ? (
+                <p style={{ textAlign: "left" }}>
+                  SANTIAGO ZEGERS BRIANCON
+                  <br />
+                  DNI: 96081178
+                  <br />
+                  Alias: zegers.LEMON
+                  <br />
+                  CBU: 0000168300000002946041
+                  <br />
+                  Banco Lemon / Findi SA
+                </p>
+              ) : bancoArs === "Banco Brubank" ? (
+                <p style={{ textAlign: "left" }}>
+                  SANTIAGO ZEGERS BRIANCON
+                  <br />
+                  DNI: 96081178
+                  <br />
+                  Alias: santiagozegers
+                  <br />
+                  CBU: 1430001713040034310010
+                  <br />
+                  Banco Brubank
+                </p>
+              ) : (
+                <p style={{ textAlign: "left" }}>
+                  SANTIAGO ZEGERS BRIANCON
+                  <br />
+                  DNI: 96081178
+                  <br />
+                  Alias: ACUDIERA.NUCA.ABEDUL
+                  <br />
+                  CBU: 0070086330004049205162
+                  <br />
+                  Banco Galicia
+                </p>
+              )
+            ) : usuario === "Nacho" ? (
+              paisInicial === "Bolivia" ? (
+                bancoBob === "Banco Ganadero" ? (
+                  <img
+                    src={`${import.meta.env.BASE_URL}Nacho Banco Ganadero.jpg`}
+                    alt="QR Nacho Banco Ganadero"
+                    style={{ width: "320px", height: "320px" }}
+                  />
+                ) : bancoBob === "Banco BCP" ? (
+                  <img
+                    src={`${import.meta.env.BASE_URL}Nacho Banco BCP.jpg`}
+                    alt="QR Nacho Banco BCP"
+                    style={{ width: "320px", height: "320px" }}
+                  />
+                ) : (
+                  <img
+                    src={`${import.meta.env.BASE_URL}Nacho Banco Mercantil.jpg`}
+                    alt="QR Nacho Banco Mercantil"
+                    style={{ width: "320px", height: "320px" }}
+                  />
+                )
+              ) : bancoArs === "Mercado Pago" ? (
+                <p style={{ textAlign: "left" }}>
+                  IGNACIO BLUSKE BRIANCON
+                  <br />
+                  DNI: 51702821
+                  <br />
+                  Alias: Ignacioblusk5
+                  <br />
+                  Mercado Pago
+                </p>
+              ) : bancoArs === "Banco Ualá" ? (
+                <p style={{ textAlign: "left" }}>
+                  IGNACIO BLUSKE BRIANCON
+                  <br />
+                  DNI: 51702821
+                  <br />
+                  Alias: ibluskeb.uala
+                  <br />
+                  CBU: 0000007900205170282162
+                  <br />
+                  Banco Ualá
+                </p>
+              ) : (
+                <p style={{ textAlign: "left" }}>
+                  IGNACIO BLUSKE BRIANCON
+                  <br />
+                  DNI: 51702821
+                  <br />
+                  Alias: ibluskeb.lemon
+                  <br />
+                  CBU: 0000168300000015980139
+                  <br />
+                  Banco Lemon
+                </p>
+              )
+            ) : (
+              <p>Nada</p>
+            )}
+          </div>
         </div>
 
-        {/* ===== BANCOS (SIN RECTÁNGULO) ===== */}
-        <div
-          style={{
-            marginTop: "30px",
-            display: "flex",
-            justifyContent: "center",
-            gap: "40px",
-            color: "#ffffff",
-            textAlign: "center",
-          }}
-        >
-          {usuario === "Zeggers" ? (
-            paisInicial === "Bolivia" ? (
-              bancoBob === "Banco Ganadero" ? (
-                <img
-                  src={`${import.meta.env.BASE_URL}Zegers Banco Ganadero.jpg`}
-                  width={260}
-                />
-              ) : (
-                <img
-                  src={`${import.meta.env.BASE_URL}Zegers Yape.jpg`}
-                  width={260}
-                />
-              )
-            ) : bancoArs === "Mercado Pago" ? (
-              <p>
-                SANTIAGO ZEGERS BRIANCON<br />
-                DNI: 96081178<br />
-                Alias: szegersb<br />
-                CBU: 0000003100068509876137
-              </p>
-            ) : bancoArs === "Banco Ualá" ? (
-              <p>
-                SANTIAGO ZEGERS BRIANCON<br />
-                DNI: 96081178<br />
-                Alias: zegerssantiagob.uala<br />
-                CBU: 0000007900209608117808
-              </p>
-            ) : bancoArs === "banco lemon" ? (
-              <p>
-                SANTIAGO ZEGERS BRIANCON<br />
-                DNI: 96081178<br />
-                Alias: zegers.LEMON<br />
-                CBU: 0000168300000002946041
-              </p>
-            ) : bancoArs === "Banco Brubank" ? (
-              <p>
-                SANTIAGO ZEGERS BRIANCON<br />
-                DNI: 96081178<br />
-                Alias: santiagozegers<br />
-                CBU: 1430001713040034310010
-              </p>
-            ) : (
-              <p>
-                SANTIAGO ZEGERS BRIANCON<br />
-                DNI: 96081178<br />
-                Alias: ACUDIERA.NUCA.ABEDUL
-              </p>
-            )
-          ) : usuario === "Nacho" ? (
-            paisInicial === "Bolivia" ? (
-              bancoBob === "Banco Ganadero" ? (
-                <img
-                  src={`${import.meta.env.BASE_URL}Nacho Banco Ganadero.jpg`}
-                  width={260}
-                />
-              ) : bancoBob === "Banco BCP" ? (
-                <img
-                  src={`${import.meta.env.BASE_URL}Nacho Banco BCP.jpg`}
-                  width={260}
-                />
-              ) : (
-                <img
-                  src={`${import.meta.env.BASE_URL}Nacho Banco Mercantil.jpg`}
-                  width={260}
-                />
-              )
-            ) : bancoArs === "Mercado Pago" ? (
-              <p>
-                IGNACIO BLUSKE BRIANCON<br />
-                DNI: 51702821<br />
-                Alias: Ignacioblusk5
-              </p>
-            ) : bancoArs === "Banco Ualá" ? (
-              <p>
-                IGNACIO BLUSKE BRIANCON<br />
-                DNI: 51702821<br />
-                Alias: ibluskeb.uala<br />
-                CBU: 0000007900205170282162
-              </p>
-            ) : (
-              <p>
-                IGNACIO BLUSKE BRIANCON<br />
-                DNI: 51702821<br />
-                Alias: ibluskeb.lemon<br />
-                CBU: 0000168300000015980139
-              </p>
-            )
-          ) : (
-            <p>Nada</p>
-          )}
-        </div>
-
-        <p
-          style={{
-            fontSize: "12px",
-            color: "#bbbbbb",
-            textAlign: "center",
-            marginTop: "20px",
-          }}
-        >
-          Al realizar el pago, está aceptando nuestros términos y condiciones.
+        <p style={{ fontSize: "12px", color: "#bbbbbb", textAlign: "center", marginTop: "18px" }}>
+          Al realizar el pago, está aceptando nuestros términos y condiciones. Puede verlos en nuestra web o puede solicitar la información al respecto.
         </p>
       </div>
     </div>
@@ -256,14 +390,18 @@ const Exportar = ({
 Exportar.propTypes = {
   usuario: PropTypes.string.isRequired,
   paisInicial: PropTypes.string.isRequired,
+  cambios: PropTypes.string.isRequired,
   bancoBob: PropTypes.string.isRequired,
   bancoArs: PropTypes.string.isRequired,
-  monto: PropTypes.number.isRequired,
+  monto: PropTypes.oneOfType([PropTypes.string, PropTypes.number]).isRequired,
   comisionVisible: PropTypes.number.isRequired,
-  cotizacionBinanceCompra: PropTypes.number.isRequired,
-  cotizacionDescuento: PropTypes.number.isRequired,
-  recibe: PropTypes.number.isRequired,
-  total: PropTypes.number.isRequired,
+  cotizacionBinanceCompra: PropTypes.oneOfType([PropTypes.string, PropTypes.number]).isRequired,
+  cotizacionBinanceVenta: PropTypes.oneOfType([PropTypes.string, PropTypes.number]).isRequired,
+  cotizacionDescuento: PropTypes.oneOfType([PropTypes.string, PropTypes.number]).isRequired,
+  recibe: PropTypes.oneOfType([PropTypes.string, PropTypes.number]).isRequired,
+  paganSinComision: PropTypes.oneOfType([PropTypes.string, PropTypes.number]).isRequired,
+  paganConComision: PropTypes.oneOfType([PropTypes.string, PropTypes.number]).isRequired,
+  total: PropTypes.oneOfType([PropTypes.string, PropTypes.number]).isRequired,
 };
 
 export default Exportar;
