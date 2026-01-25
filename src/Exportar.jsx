@@ -20,15 +20,36 @@ const Exportar = ({
 }) => {
   const tableRef = useRef(null);
 
-  // Helpers seguros (evita NaN)
+  ///////////////////Métodos utiles para formatear y reescrbir numeros////////////////////////
+
   const toNumber = (v) => {
-    const n = typeof v === "string" ? Number(v.replace(",", ".")) : Number(v);
+    if (typeof v === "number") return v;
+    if (typeof v !== "string") return 0;
+
+    const s = v.trim();
+
+    //Caso input number en locale español: "100,25"
+    if (/^\d+,\d+$/.test(s)) {
+      const n = Number(s.replace(",", "."));
+      return Number.isFinite(n) ? n : 0;
+    }
+
+    //Caso entero: "1000"
+    if (/^\d+$/.test(s)) {
+      return Number(s);
+    }
+
+    //Fallback por si llega algo formateado tipo "1.234,56"
+    const normalized = s.replace(/\./g, "").replace(",", ".");
+    const n = Number(normalized);
     return Number.isFinite(n) ? n : 0;
   };
 
   const fmt0 = (n) => new Intl.NumberFormat("es-ES", { maximumFractionDigits: 0 }).format(n);
   const fmt2 = (n) =>
     new Intl.NumberFormat("es-ES", { minimumFractionDigits: 2, maximumFractionDigits: 2 }).format(n);
+
+  ////////////Exportar la imagen/////////////////
 
   const exportToImage = () => {
     if (!tableRef.current) return;
