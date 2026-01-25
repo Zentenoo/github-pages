@@ -47,8 +47,8 @@ const Exportar = ({
 
   // ====== Datos de destino/origen para etiquetas ======
   const destinoNombre = paisInicial === "Bolivia" ? "ARGENTINA" : "BOLIVIA";
-  const monedaDestino = paisInicial === "Bolivia" ? "ARS" : "Bs";
-  const monedaPago = paisInicial === "Bolivia" ? "Bs" : "ARS";
+  const monedaDestino = paisInicial === "Bolivia" ? "Ars" : "Bs";
+  const monedaPago = paisInicial === "Bolivia" ? "Bs" : "Ars";
 
   // Top: monto que recibe (destino)
   const recibeN = useMemo(() => toNumber(recibe), [recibe]);
@@ -94,7 +94,7 @@ const Exportar = ({
   const smallGray = {
     color: "#bbbbbb",
     fontSize: "16px",
-    marginTop: "16px",
+    marginTop: "5px",
     textAlign: "left",
   };
 
@@ -136,8 +136,8 @@ const Exportar = ({
                 position: "absolute",
                 right: "28px",
                 top: "28px",
-                width: "78px",
-                height: "52px",
+                width: "98px",
+                height: "82px",
                 borderRadius: "4px",
               }}
             />
@@ -166,7 +166,7 @@ const Exportar = ({
               border: "3px solid #1c4780",
               position: "absolute",
               left: "50%",
-              top: "50%",                        
+              top: "50%",
               transform: "translate(-50%, -50%)",
               display: "flex",
               alignItems: "center",
@@ -174,19 +174,46 @@ const Exportar = ({
               zIndex: 10,
             }}
           >
+            {/* TAPÓN IZQUIERDO */}
+            <div
+              style={{
+                position: "absolute",
+                left: "-12px",
+                top: "50%",
+                transform: "translateY(-50%)",
+                width: "14px",
+                height: "35px",
+                backgroundColor: "#011b36",
+              }}
+            />
 
+            {/* TAPÓN DERECHO */}
+            <div
+              style={{
+                position: "absolute",
+                right: "-12px",
+                top: "50%",
+                transform: "translateY(-50%)",
+                width: "14px",
+                height: "35px",
+                backgroundColor: "#011b36",
+              }}
+            />
+
+            {/* LOGO */}
             <img
-              src={`${import.meta.env.BASE_URL}Logo.png`}
+              src={`${import.meta.env.BASE_URL}logo_sin_letras.png`}
               alt="Econotransfer"
               style={{
-                width: "86px",
-                transform: "rotate(-90deg)",
+                width: "125px",
+                transform: "rotate(90deg)",
               }}
             />
           </div>
 
+
           {/* Separación real entre cards para que el logo quede entre medio */}
-          <div style={{ height: "78px" }} />
+          <div style={{ height: "35px" }} />
 
           {/* ======= CARD 2: TOTAL A PAGAR ======= */}
           <div style={{ ...cardStyle, position: "relative" }}>
@@ -202,8 +229,8 @@ const Exportar = ({
                 position: "absolute",
                 right: "28px",
                 top: "28px",
-                width: "78px",
-                height: "52px",
+                width: "98px",
+                height: "82px",
                 borderRadius: "4px",
               }}
             />
@@ -231,7 +258,7 @@ const Exportar = ({
           <div
             style={{
               color: "#ffffff",
-              fontSize: "34px",
+              fontSize: "40px",
               fontWeight: 800,
               marginBottom: "14px",
             }}
@@ -239,7 +266,7 @@ const Exportar = ({
             Utiliza este banco
           </div>
 
-          <div style={{ display: "flex", justifyContent: "center", gap: "40px", color: "#ffffff" }}>
+          <div style={{ display: "flex", justifyContent: "center", gap: "38px", color: "#ffffff" }}>
             {/* === LÓGICA DE BANCOS ORIGINAL (MISMA ESTRUCTURA) === */}
             {usuario === "Zeggers" ? (
               paisInicial === "Bolivia" ? (
@@ -257,7 +284,11 @@ const Exportar = ({
                   />
                 )
               ) : bancoArs === "Mercado Pago" ? (
-                <p style={{ textAlign: "left" }}>
+                <p style={{ 
+                    textAlign: "left" ,
+                    fontSize: "18px",
+                    lineHeight: "1.7",
+                }}>
                   SANTIAGO ZEGERS BRIANCON
                   <br />
                   DNI: 96081178
@@ -269,7 +300,11 @@ const Exportar = ({
                   Mercado Pago
                 </p>
               ) : bancoArs === "Banco Ualá" ? (
-                <p style={{ textAlign: "left" }}>
+                <p style={{ 
+                    textAlign: "left" ,
+                    fontSize: "18px",
+                    lineHeight: "1.7",
+                }}>
                   SANTIAGO ZEGERS BRIANCON
                   <br />
                   DNI: 96081178
@@ -281,7 +316,11 @@ const Exportar = ({
                   Banco Ualá
                 </p>
               ) : bancoArs === "banco lemon" ? (
-                <p style={{ textAlign: "left" }}>
+                <p style={{ 
+                    textAlign: "left" ,
+                    fontSize: "18px",
+                    lineHeight: "1.7",
+                }}>
                   SANTIAGO ZEGERS BRIANCON
                   <br />
                   DNI: 96081178
@@ -293,7 +332,11 @@ const Exportar = ({
                   Banco Lemon / Findi SA
                 </p>
               ) : bancoArs === "Banco Brubank" ? (
-                <p style={{ textAlign: "left" }}>
+                <p style={{ 
+                    textAlign: "left" ,
+                    fontSize: "18px",
+                    lineHeight: "1.7",
+                }}>
                   SANTIAGO ZEGERS BRIANCON
                   <br />
                   DNI: 96081178
@@ -305,7 +348,11 @@ const Exportar = ({
                   Banco Brubank
                 </p>
               ) : (
-                <p style={{ textAlign: "left" }}>
+                <p style={{ 
+                    textAlign: "left" ,
+                    fontSize: "18px",
+                    lineHeight: "1.7",
+                }}>
                   SANTIAGO ZEGERS BRIANCON
                   <br />
                   DNI: 96081178
@@ -339,7 +386,11 @@ const Exportar = ({
                   />
                 )
               ) : bancoArs === "Mercado Pago" ? (
-                <p style={{ textAlign: "left" }}>
+                <p style={{ 
+                    textAlign: "left" ,
+                    fontSize: "18px",
+                    lineHeight: "1.7",
+                }}>
                   IGNACIO BLUSKE BRIANCON
                   <br />
                   DNI: 51702821
@@ -349,7 +400,11 @@ const Exportar = ({
                   Mercado Pago
                 </p>
               ) : bancoArs === "Banco Ualá" ? (
-                <p style={{ textAlign: "left" }}>
+                <p style={{ 
+                    textAlign: "left" ,
+                    fontSize: "18px",
+                    lineHeight: "1.7",
+                }}>
                   IGNACIO BLUSKE BRIANCON
                   <br />
                   DNI: 51702821
@@ -361,7 +416,11 @@ const Exportar = ({
                   Banco Ualá
                 </p>
               ) : (
-                <p style={{ textAlign: "left" }}>
+                <p style={{ 
+                    textAlign: "left" ,
+                    fontSize: "18px",
+                    lineHeight: "1.7",
+                }}>
                   IGNACIO BLUSKE BRIANCON
                   <br />
                   DNI: 51702821
