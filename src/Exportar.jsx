@@ -28,22 +28,29 @@ const Exportar = ({
 
     const s = v.trim();
 
-    //Caso input number en locale español: "100,25"
+    // Caso 1: decimal con punto → "9.56"
+    if (/^\d+\.\d+$/.test(s)) {
+      const n = Number(s);
+      return Number.isFinite(n) ? n : 0;
+    }
+
+    // Caso 2: decimal con coma → "9,56"
     if (/^\d+,\d+$/.test(s)) {
       const n = Number(s.replace(",", "."));
       return Number.isFinite(n) ? n : 0;
     }
 
-    //Caso entero: "1000"
+    // Caso 3: entero → "1000"
     if (/^\d+$/.test(s)) {
       return Number(s);
     }
 
-    //Fallback por si llega algo formateado tipo "1.234,56"
+    // Caso 4: formato ES completo → "1.234,56"
     const normalized = s.replace(/\./g, "").replace(",", ".");
     const n = Number(normalized);
     return Number.isFinite(n) ? n : 0;
   };
+
 
   const fmt0 = (n) => new Intl.NumberFormat("es-ES", { maximumFractionDigits: 0 }).format(n);
   const fmt2 = (n) =>
@@ -166,7 +173,7 @@ const Exportar = ({
             <div style={titleLeft}>Monto que recibe</div>
 
             <div style={bigLeft}>
-              {fmt0(recibeN)} {monedaDestino}
+              {fmt2(recibeN)} {monedaDestino}
             </div>
 
             {/* Tipos de cambio (como referencia: label + 2 valores en la misma línea) */}
@@ -203,7 +210,7 @@ const Exportar = ({
                 top: "50%",
                 transform: "translateY(-50%)",
                 width: "14px",
-                height: "35px",
+                height: "34px",
                 backgroundColor: "#011b36",
               }}
             />
@@ -216,7 +223,7 @@ const Exportar = ({
                 top: "50%",
                 transform: "translateY(-50%)",
                 width: "14px",
-                height: "35px",
+                height: "34px",
                 backgroundColor: "#011b36",
               }}
             />
