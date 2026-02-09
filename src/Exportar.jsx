@@ -24,13 +24,13 @@ const Exportar = ({
 
 
   const generarCodigo = () => {
-    const randomNumbers = Math.floor(1000 + Math.random() * 9000); 
+    const randomNumbers = Math.floor(1000 + Math.random() * 9000);
     const date = new Date();
     const monthAbbr = date.toLocaleString('es-ES', { month: 'short' }).toUpperCase();
-    const year = date.getFullYear().toString().slice(-3); 
+    const year = date.getFullYear().toString().slice(-3);
     return `${randomNumbers}${monthAbbr}${year}`;
   };
-  
+
   const codigo = generarCodigo();
 
   const exportToImage = () => {
@@ -74,31 +74,31 @@ const Exportar = ({
         <table style={{ width: "100%", borderCollapse: "collapse" }}>
           <tbody>
             <tr>
-              <td style={{ padding: "2px" }}>Cambio {paisInicial==="Bolivia"? "Bs./USD" : "USD/Bs."}</td>
+              <td style={{ padding: "2px" }}>Cambio {paisInicial === "Bolivia" ? "Bs./USD" : "USD/Bs."}</td>
               {paisInicial === "Bolivia" ? (
                 <td style={{ textAlign: "right", padding: "2px" }}>
                   {new Intl.NumberFormat("es-ES", {
-                  minimumFractionDigits: 2,
-                  maximumFractionDigits: 2,
-                  useGrouping: true,
+                    minimumFractionDigits: 2,
+                    maximumFractionDigits: 2,
+                    useGrouping: true,
                   })
-                  .format(cotizacionBinanceCompra)
+                    .format(cotizacionBinanceCompra)
                   } Bs.
                 </td>
-              ):(
+              ) : (
                 <td style={{ textAlign: "right", padding: "2px" }}>{cotizacionDescuento} Bs.</td>
               )}
-              <td style={{ padding: "2px" }}>Cambio {paisInicial==="Argentina"? "ARS/USD" : "USD/ARS"} </td>
+              <td style={{ padding: "2px" }}>Cambio {paisInicial === "Argentina" ? "ARS/USD" : "USD/ARS"} </td>
               {paisInicial === "Bolivia" ? (
                 <td style={{ textAlign: "right", padding: "2px" }}>{cotizacionDescuento} ARS</td>
-              ):(
+              ) : (
                 <td style={{ textAlign: "right", padding: "2px" }}>
                   {new Intl.NumberFormat("es-ES", {
-                  minimumFractionDigits: 2,
-                  maximumFractionDigits: 2,
-                  useGrouping: true,
+                    minimumFractionDigits: 2,
+                    maximumFractionDigits: 2,
+                    useGrouping: true,
                   })
-                  .format(cotizacionBinanceCompra)
+                    .format(cotizacionBinanceCompra)
                   } ARS
                 </td>
               )}
@@ -107,14 +107,14 @@ const Exportar = ({
         </table>
 
         <h3 style={{ backgroundColor: "#001b36", color: "white", padding: "2px", textAlign: "center", margin: "0px" }}>MONTO COTIZADO: {cambios} {new Intl.NumberFormat("es-ES", {
-                maximumFractionDigits: 2,
-                useGrouping: true,
-                })
-                .format(monto)}
+          maximumFractionDigits: 2,
+          useGrouping: true,
+        })
+          .format(monto)}
         </h3>
 
         <h3 style={{ backgroundColor: "#e6ad00", color: "white", padding: "2px", textAlign: "center", margin: "0px" }}>
-          RECIBE EN {paisInicial==="Bolivia"? "ARGENTINA" : "BOLIVIA"}: {paisInicial==="Bolivia" ? "ARS" : "Bs."} {recibe}
+          RECIBE EN {paisInicial === "Bolivia" ? "ARGENTINA" : "BOLIVIA"}: {paisInicial === "Bolivia" ? "ARS" : "Bs."} {recibe}
         </h3>
 
         <table style={{ width: "100%", borderCollapse: "collapse" }}>
@@ -122,13 +122,13 @@ const Exportar = ({
             <tr>
               <td style={{ backgroundColor: "#001b36", color: "white", padding: "2px" }}>COMISIÓN</td>
               <td style={{ padding: "2px" }}>{comisionVisible}%</td>
-              <td style={{ padding: "2px" }}>{paisInicial==="Bolivia"? "Bs." : "ARS"}</td>
+              <td style={{ padding: "2px" }}>{paisInicial === "Bolivia" ? "Bs." : "ARS"}</td>
               <td style={{ padding: "2px" }}>{paganConComision}</td>
             </tr>
           </tbody>
         </table>
 
-        <h3 style={{ backgroundColor: "#e6ad00", color: "white", padding: "2px", textAlign: "center", margin: "0px" }}><strong>TOTAL A PAGAR EN: {paisInicial==="Bolivia"? "Bs." : "ARS"} {total}</strong></h3>
+        <h3 style={{ backgroundColor: "#e6ad00", color: "white", padding: "2px", textAlign: "center", margin: "0px" }}><strong>TOTAL A PAGAR EN: {paisInicial === "Bolivia" ? "Bs." : "ARS"} {total}</strong></h3>
 
         <table style={{ width: "100%", borderCollapse: "collapse" }}>
           <tbody>
@@ -145,17 +145,7 @@ const Exportar = ({
           <div style={{ textAlign: "center", display: "flex", flexDirection: "column" }}>
             {usuario === "Zeggers" ? (
               paisInicial === "Bolivia" ? (
-                bancoBob === "Banco Ganadero" ? (
-                  <div>
-                    <h4 className="mb-1">USA ESTE QR PARA FACILITARTE:</h4>
-                    <img
-                      src={`${import.meta.env.BASE_URL}Zegers Banco Ganadero.jpg`}
-                      alt="QR Code"
-                      style={{ width: "300px", height: "300px" }}
-                    />
-                  </div>
-
-                ) : (
+                bancoBob === "Banco Yape" ? (
                   <div>
                     <h4 className="mb-1">USA ESTE QR PARA FACILITARTE:</h4>
                     <img
@@ -164,6 +154,58 @@ const Exportar = ({
                       style={{ width: "300px", height: "300px" }}
                     />
                   </div>
+
+                ) : (bancoBob === "Banco BCP" ? (
+                  <div>
+                    <h4 className="mb-1">USA ESTE QR PARA FACILITARTE:</h4>
+                    <img
+                      src={`${import.meta.env.BASE_URL}Zegers Banco BCP.png`}
+                      alt="QR Code"
+                      style={{ width: "300px", height: "300px" }}
+                    />
+                  </div>
+                ) : (bancoBob === "Banco Mercantil" ? (
+                  <div>
+                    <h4 className="mb-1">USA ESTE QR PARA FACILITARTE:</h4>
+                    <img
+                      src={`${import.meta.env.BASE_URL}Zegers Banco Mercantil.png`}
+                      alt="QR Code"
+                      style={{ width: "300px", height: "300px" }}
+                    />
+                  </div>
+                ) : (
+                  bancoBob === "Banco BNB" ? (
+                    <div>
+                      <h4 className="mb-1">USA ESTE QR PARA FACILITARTE:</h4>
+                      <img
+                        src={`${import.meta.env.BASE_URL}Zegers Banco BNB.png`}
+                        alt="QR Code"
+                        style={{ width: "300px", height: "300px" }}
+                      />
+                    </div>
+                  ) : (bancoBob === "Banco Altoke" ? (
+                    <div>
+                      <h4 className="mb-1">USA ESTE QR PARA FACILITARTE:</h4>
+                      <img
+                        src={`${import.meta.env.BASE_URL}Zegers Banco Altoke.png`}
+                        alt="QR Code"
+                        style={{ width: "300px", height: "300px" }}
+                      />
+                    </div>
+                  ) : (
+                    <div>
+                      <h4 className="mb-1">USA ESTE QR PARA FACILITARTE:</h4>
+                      <img
+                        src={`${import.meta.env.BASE_URL}Zegers Banco Ganadero.png`}
+                        alt="QR Code"
+                        style={{ width: "300px", height: "300px" }}
+                      />
+                    </div>
+                  )
+                  )
+                )
+                )
+
                 )
               ) : (
                 bancoArs === "Mercado Pago" ? (
@@ -197,59 +239,59 @@ const Exportar = ({
                     </div>
                   ) : (
                     bancoArs === "banco lemon" ? (
-                    <div style={{ display: "flex", flexDirection: "column", alignItems: "center", gap: "0px" }}>
-                      <p>
-                        SANTIAGO ZEGERS BRIANCON
-                        <br />
-                        DNI: 96081178
-                        <br />
-                        Alias: zegers.LEMON
-                        <br />
-                        CBU: 0000168300000002946041
-                        <br />
-                        Banco Lemon / Findi SA
-                      </p>
-                    </div>
-                  ):(
-                    bancoArs === "Banco Brubank" ? (
                       <div style={{ display: "flex", flexDirection: "column", alignItems: "center", gap: "0px" }}>
                         <p>
                           SANTIAGO ZEGERS BRIANCON
                           <br />
                           DNI: 96081178
                           <br />
-                          Alias: santiagozegers
+                          Alias: zegers.LEMON
                           <br />
-                          CBU: 1430001713040034310010
+                          CBU: 0000168300000002946041
                           <br />
-                          Banco Brubank
+                          Banco Lemon / Findi SA
                         </p>
                       </div>
-                    ):(
-                      <div style={{ display: "flex", flexDirection: "column", alignItems: "center", gap: "0px" }}>
-                        <p>
-                          SANTIAGO ZEGERS BRIANCON
-                          <br />
-                          DNI: 96081178
-                          <br />
-                          Alias: ACUDIERA.NUCA.ABEDUL
-                          <br />
-                          CBU: 0070086330004049205162
-                          <br />
-                          Banco Galicia
-                        </p>
-                      </div>
-                    )
-                  ))
+                    ) : (
+                      bancoArs === "Banco Brubank" ? (
+                        <div style={{ display: "flex", flexDirection: "column", alignItems: "center", gap: "0px" }}>
+                          <p>
+                            SANTIAGO ZEGERS BRIANCON
+                            <br />
+                            DNI: 96081178
+                            <br />
+                            Alias: santiagozegers
+                            <br />
+                            CBU: 1430001713040034310010
+                            <br />
+                            Banco Brubank
+                          </p>
+                        </div>
+                      ) : (
+                        <div style={{ display: "flex", flexDirection: "column", alignItems: "center", gap: "0px" }}>
+                          <p>
+                            SANTIAGO ZEGERS BRIANCON
+                            <br />
+                            DNI: 96081178
+                            <br />
+                            Alias: ACUDIERA.NUCA.ABEDUL
+                            <br />
+                            CBU: 0070086330004049205162
+                            <br />
+                            Banco Galicia
+                          </p>
+                        </div>
+                      )
+                    ))
                 )
               )
             ) : usuario === "Nacho" ? (
               paisInicial === "Bolivia" ? (
-                bancoBob === "Banco Ganadero" ? (
+                bancoBob === "Banco Mercantil" ? (
                   <div>
                     <h4 className="mb-1">USA ESTE QR PARA FACILITARTE:</h4>
                     <img
-                      src={`${import.meta.env.BASE_URL}Nacho Banco Ganadero.jpg`}
+                      src={`${import.meta.env.BASE_URL}Nacho Banco Mercantil.jpg`}
                       alt="QR Code"
                       style={{ width: "300px", height: "300px" }}
                     />
@@ -263,16 +305,27 @@ const Exportar = ({
                       style={{ width: "300px", height: "300px" }}
                     />
                   </div>
-                ) :  (
-                  <div>
-                    <h4 className="mb-1">USA ESTE QR PARA FACILITARTE:</h4>
-                    <img
-                      src={`${import.meta.env.BASE_URL}Nacho Banco Mercantil.jpg`}
-                      alt="QR Code"
-                      style={{ width: "300px", height: "300px" }}
-                    />
-                  </div>
-                ) 
+                ) : (
+                  bancoBob === "Banco Bisa" ? (
+                    <div>
+                      <h4 className="mb-1">USA ESTE QR PARA FACILITARTE:</h4>
+                      <img
+                        src={`${import.meta.env.BASE_URL}Nacho Banco Bisa.png`}
+                        alt="QR Code"
+                        style={{ width: "300px", height: "300px" }}
+                      />
+                    </div>
+                  ) : (
+                    <div>
+                      <h4 className="mb-1">USA ESTE QR PARA FACILITARTE:</h4>
+                      <img
+                        src={`${import.meta.env.BASE_URL}Nacho Banco Ganadero.png`}
+                        alt="QR Code"
+                        style={{ width: "300px", height: "300px" }}
+                      />
+                    </div>
+                  )
+                )
               ) : (
                 (bancoArs === "Mercado Pago") ? (
                   <div style={{ display: "flex", flexDirection: "column", alignItems: "center", gap: "0px" }}>
@@ -286,7 +339,7 @@ const Exportar = ({
                       Mercado Pago
                     </p>
                   </div>
-                ) :(
+                ) : (
                   (bancoArs === "Banco Ualá") ? (
                     <div style={{ display: "flex", flexDirection: "column", alignItems: "center", gap: "0px" }}>
                       <p>
@@ -314,7 +367,7 @@ const Exportar = ({
                         <br />
                         Banco Lemon
                       </p>
-                    </div>                 
+                    </div>
                   )
                 )
               )

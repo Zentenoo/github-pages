@@ -25,6 +25,11 @@ export const Plantilla = () => {
     const [cotizacionBinanceVenta, setCotizacionBinanceVenta] = useState('')
     const [cotizacionBinanceCompra, setCotizacionBinanceCompra] = useState('')
 
+    const listBancoBobZeggers = ["Banco Ganadero", "Banco Yape", "Banco Mercantil", "Banco BCP", "Banco BNB","Banco Altoke"]
+    const listBancoBobNacho = ["Banco Ganadero", "Banco Mercantil", "Banco BCP", "Banco Bisa"]
+    // const listBancoArsZeggers = ["Mercado Pago", "banco lemon", "Banco Ualá", "Banco Brubank", "Banco Galicia"]
+    // const listBancoArsNacho = ["Mercado Pago", "Banco Ualá", "banco lemon"]
+
     useEffect(() => {
         if (usuario) {
             localStorage.setItem('usuario', usuario);
@@ -383,24 +388,18 @@ export const Plantilla = () => {
                     <h4>Banco Boliviano que figurará la cotización</h4>
                     <div className='flex justify-center'>
                         <div className='flex flex-col gap-3 items-start'>
-                            <label style={{ marginRight: '10px' }}>
-                                <input
-                                    type="radio"
-                                    value="Banco Ganadero"
-                                    checked={bancoBob === 'Banco Ganadero'}
-                                    onChange={(e) => setBancoBob(e.target.value)}
-                                />
-                                Banco Ganadero
-                            </label>
-                            <label style={{ marginRight: '10px' }}>
-                                <input
-                                    type="radio"
-                                    value="Banco Credito"
-                                    checked={bancoBob === 'Banco Credito'}
-                                    onChange={(e) => setBancoBob(e.target.value)}
-                                />
-                                Banco Credito
-                            </label>
+                            {
+                                listBancoBobZeggers.map((item, index) => (
+                                    <label key={index} style={{ marginRight: '10px' }}>
+                                        <input
+                                            type="radio"
+                                            value={item}
+                                            checked={bancoBob === item}
+                                            onChange={(e) => setBancoBob(e.target.value)}
+                                        />
+                                        {item}
+                                    </label>
+                            ))}
                         </div>
                     </div>
                 </div> : <></>}
@@ -457,41 +456,27 @@ export const Plantilla = () => {
                         </div>
                     </div>
                 </div> : <></>}
-                {usuario == "Nacho" && paisInicial == "Bolivia" ? <div>
+                {usuario == "Nacho" && paisInicial == "Bolivia" ? 
+                <div className='border border-gray-300 rounded-md shadow-sm p-5'>
                     <h4>Banco Boliviano que figurará la cotización</h4>
                     <div className='flex justify-center'>
                         <div className='flex flex-col gap-3 items-start'>
-                            <label style={{ marginRight: '10px' }}>
-                                <input
-                                    type="radio"
-                                    value="Banco Mercantil"
-                                    checked={bancoBob === 'Banco Mercantil'}
-                                    onChange={(e) => setBancoBob(e.target.value)}
-                                />
-                                Banco Mercantil
-                            </label>
-                            <label style={{ marginRight: '10px' }}>
-                                <input
-                                    type="radio"
-                                    value="Banco Ganadero"
-                                    checked={bancoBob === 'Banco Ganadero'}
-                                    onChange={(e) => setBancoBob(e.target.value)}
-                                />
-                                Banco Ganadero
-                            </label>
-                            <label style={{ marginRight: '10px' }}>
-                                <input
-                                    type="radio"
-                                    value="Banco BCP"
-                                    checked={bancoBob === 'Banco BCP'}
-                                    onChange={(e) => setBancoBob(e.target.value)}
-                                />
-                                Banco BCP
-                            </label>
+                            {
+                                listBancoBobNacho.map((item, index) => (
+                                    <label key={index} style={{ marginRight: '10px' }}>
+                                        <input
+                                            type="radio"
+                                            value={item}
+                                            checked={bancoBob === item}
+                                            onChange={(e) => setBancoBob(e.target.value)}
+                                        />
+                                        {item}
+                                    </label>
+                            ))}
                         </div>
                     </div>
                 </div> : <></>}
-                {usuario == "Nacho" && paisInicial == "Argentina" ? <div>
+                {usuario == "Nacho" && paisInicial == "Argentina" ? <div className='border border-gray-300 rounded-md shadow-sm p-5'>
                     <h4>Banco Argentino que figurará la cotización</h4>
                     <div className='flex justify-center'>
                         <div className='flex flex-col gap-3 items-start'>
