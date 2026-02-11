@@ -1,6 +1,6 @@
 import axios from 'axios';
 
-const url = 'https://servidorecono-1l9d.onrender.com/api/binance';
+const url = 'https://econoserver.onrender.com/api/binance';
 
 export const cargarCompraBob = async () => {
   try {
