@@ -34,9 +34,9 @@ function App() {
 
   return (
     <>
-      <h1 className="read-the-docs text-[2em] lg:text-[3.2em]">
-        EconoMergeConflict
-            </h1>
+            <h1 className="">
+  Santiago
+      </h1>
       <div style={{display: 'flex', justifyContent:"center",marginBottom:"10px"}} className="flex items-center gap-3 mb-5">
         <span className="text-lg font-semibold">Mostrar</span>
         <label className="relative inline-flex items-center cursor-pointer">
