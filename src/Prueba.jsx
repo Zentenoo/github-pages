@@ -38,6 +38,8 @@ function App() {
         Zenteno
         <br />
         Mancilla
+        <br/>
+        Santiago
       </h1>
       <div style={{display: 'flex', justifyContent:"center",marginBottom:"10px"}} className="flex items-center gap-3 mb-5">
         <span className="text-lg font-semibold">Mostrar</span>
