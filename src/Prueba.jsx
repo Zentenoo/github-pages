@@ -35,7 +35,7 @@ function App() {
   return (
     <>
       <h1 className="read-the-docs text-[2em] lg:text-[3.2em] lg:leading-[1.1] ">
-        EconoTransfer
+        EconoTravestis
       </h1>
       <div style={{display: 'flex', justifyContent:"center",marginBottom:"10px"}} className="flex items-center gap-3 mb-5">
         <span className="text-lg font-semibold">Mostrar</span>
@@ -96,26 +96,6 @@ function App() {
                 </ul>
               </div>
             </div>
-            {/* <div style={{ display: 'flex', flexDirection: 'column' }}>
-              <div className="data-section border rounded-md border-gray-300">
-                <h2>Datos de Venta Brl</h2>
-                {dataVentaBrl.length === 0 && <p>No hay datos disponibles</p>}
-                <ul>
-                  {dataVentaBrl.map((item, index) => (
-                    <li key={index}> Precio: {item}</li>
-                  ))}
-                </ul>
-              </div>
-              <div className="data-section border rounded-md border-gray-300">
-                <h2>Datos de Compra Brl</h2>
-                {dataCompraBob.length === 0 && <p>No hay datos disponibles</p>}
-                <ul>
-                  {dataCompraBrl.map((item, index) => (
-                    <li key={index}> Precio: {item}</li>
-                  ))}
-                </ul>
-              </div>
-            </div> */}
           </div>
         ) : (
           ""
