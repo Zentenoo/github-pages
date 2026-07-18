@@ -12,6 +12,25 @@ function App() {
   const [dataCompraBrl, setDataCompraBrl] = useState([])
   const [tablasVisibles, setTablasVisibles] = useState(false)
 
+  useEffect(() => {
+    const cargarData = async () => {
+      const compraBob = await cargarCompraBob();
+      const ventaBob = await cargarVentaBob();
+      const ventaArs = await cargarVentaArs();
+      const compraArs = await cargarCompraArs();
+      const ventaBrl = await cargarVentaBrl();
+      const compraBrl = await cargarCompraBrl();
+
+      setDataCompraBob(compraBob);
+      setDataVentaBob(ventaBob);
+      setDataArs(ventaArs);
+      setDataCompraArs(compraArs);
+      setDataVentaBrl(ventaBrl);
+      setDataCompraBrl(compraBrl);
+    };
+
+    cargarData();
+  }, [])
 
   return (
     <>
